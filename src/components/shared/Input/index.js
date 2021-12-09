@@ -7,6 +7,7 @@ function Input({
     Label,
     type= 'text',
     className,
+    error,
     icon = <IconSearch />,
     ...restProps
 }) {
@@ -41,14 +42,19 @@ function Input({
     }
 
     return (
-            <div className="form-control">
+            <div className={cls("form-control",{
+                'form-control_haserror': error
+            })}>
                 { Label && <label>{ Label }</label>}
-                {type === 'password' && <i className={classesIconShow} onClick={handleShowPass}></i>}
-                <input 
-                    type={localType}
-                    className={className}
-                    {...restProps} 
-                />
+                <div className="form-control_wrapper">
+                    {type === 'password' && <i className={classesIconShow} onClick={handleShowPass}></i>}
+                    <input 
+                        type={localType}
+                        className={className}
+                        {...restProps} 
+                    />
+                </div>
+                {error && <span className="form-control_error">{ error }</span>}
             </div>
     );
 }

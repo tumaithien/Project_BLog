@@ -67,3 +67,12 @@
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex; } }
+.form-control_error{
+  color: red
+}
+.form-control_wrapper{
+  position: relative;
+}
+.form-control.form-control_haserror input{
+  border: 1px solid red;
+}

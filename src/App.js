@@ -4,15 +4,23 @@ import HomePage from './pages/HomePage'
 import Login from './pages/LoginPage'
 import Register from './pages/Register'
 import Search from './pages/Search'
-import React from 'react'
+import React, { useEffect } from 'react'
 import PostDetailsPage from './pages/PostDetailsPage'
 import {
   BrowserRouter as Router,
   Switch,
   Route
 } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { actAsyncAllCategory } from './store/category/action'
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(actAsyncAllCategory())
+  }, [dispatch])
   return (
     <Router>
       <div className="wrapper-content">

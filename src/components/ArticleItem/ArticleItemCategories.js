@@ -1,27 +1,32 @@
 import './article-item.css'
 import cls from 'classnames'
-import Button from '../shared/Button'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 function ArticleItemCategories(
     {
         className,
-        btnLabel = "News",
-        btnProps = {
-            type: 'category',
-            as: 'a',
-            href: '#'
-        }
+        categoriesId
     }
-){
+) {
 
-    const classes = cls('article-item__categories',className)
-
-    return(
+    const classes = cls('article-item__categories', className)
+    const hashCategoryById = useSelector(state => state.Category.hashCategoryById)
+    return (
         <>
             <ul className={classes}>
-                <li>
-                    <Button { ...btnProps}>{btnLabel}</Button>
-                </li>
+                {
+                    categoriesId.map(dataId => {
+                        const category = hashCategoryById[dataId]
+                        const slugLink = '/category/'+ category.slug
+                        return (
+                            <li key={category.id}>
+                                <Link to={slugLink} className="btn btn-category">{category.name}</Link>
+                            </li>
+                        )
+                    })
+                }
+
             </ul>
         </>
     )

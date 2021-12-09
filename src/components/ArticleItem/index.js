@@ -29,7 +29,7 @@ function ArticleItem(
     if(!post){
         return null
     }
-    const { slug, title, author, createDate, thumb, author_id } = post
+    const { slug, title, author, createDate, thumb, author_id, categoriesId } = post
 
     const slugLink = '/post/' + slug
     const slugAuthor = '/user/' + author_id
@@ -39,7 +39,7 @@ function ArticleItem(
             <article className={classes}>
                 <ArticleItemThumb authorName={author.nickname} thumb={thumb} slugLink={slugLink} title={title}  />
                 <div className="article-item__content">
-                    {isShowCategories && <ArticleItemCategories />}
+                    {isShowCategories && <ArticleItemCategories categoriesId={categoriesId} />}
                     {isShowStar && <ArticleItemStar />}
                         <ArticleItemTitle children={title} slugLink={slugLink} />
                     {isShowDecs && <ArticleItemDesc />}

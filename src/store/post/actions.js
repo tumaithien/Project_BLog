@@ -19,7 +19,6 @@ export function actAsyncGetArticleLastest(){
         try{
             const response = await postServices.getArticleLastest();
             const posts = response.data.map(mappingPostData);
-            console.log('posts', posts);
             dispatch(actGetArticleLastest(posts))
         }
         catch(error){
@@ -39,7 +38,6 @@ export function actAsyncGetArticleGeneral() {
         try{
             const response = await postServices.getArticleGeneral();
             const generalPosts = response.data.map(mappingPostData);
-            console.log('generalPosts',generalPosts)
             dispatch(actGetArticleGeneral(generalPosts))
         }
         catch(error){
@@ -59,7 +57,6 @@ export function actAsyncGetArticlePopular() {
         try{
             const response = await postServices.getArticlePopular();
             const popularPosts = response.data.map(mappingPostData);
-            console.log('popularPosts', popularPosts)
             dispatch(actGetArticlePopular(popularPosts))
         }
         catch(error){
