@@ -3,30 +3,33 @@ import Input from '../../components/shared/Input'
 import MainTitle from '../../components/shared/MainTitle'
 import { Link } from 'react-router-dom'
 import './login.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { validateFormData } from '../../helpers'
+import { useDispatch } from 'react-redux'
+import { actAsyncLogin } from '../../store/auth/actions'
 
 
 function Login() {
 
-    const [isFormDirty, setIsFormDirty] = useState(false);
+    const dispatch = useDispatch();
 
+    const [isFormDirty, setIsFormDirty] = useState(true);
+    const [formError, setFormError] = useState('')
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         username:{
-            value: '',
+            value: 'tumaithien',
             error: ''
         },
         password:{
-            value: '',
+            value: '123456',
             error: ''
         }
     });
-    let key = Object.keys(formData);
-    key.forEach((key, index) => {
-        console.log(`${key}: ${formData[key]}`)
-        let c = Object.values(formData[key])
-        console.log(c)
-    })
+    
+    const { username, password } = formData;
+    
+    
 
     function handleOnChange(evt) {
         const name = evt.target.name;
@@ -44,7 +47,20 @@ function Login() {
     
     function checkFormIsValid() {
         if(!isFormDirty){
-            setFormData({
+            // for(const key in formData){
+            //     setFormData(
+            //         {
+            //         [key]:{
+            //             value: '',
+            //             error: validateFormData({
+            //                 value: '',
+            //                 name: `${key}`
+            //             })
+            //         }
+            //     })
+            // }
+            setFormData(
+                {
                 username:{
                     value: '',
                     error: validateFormData({
@@ -61,14 +77,33 @@ function Login() {
                 }
             })
         }
-        
-        if(formData.username.error || formData.password.error){
-            return false;
+
+        for(const key in formData){
+            if(formData[key].error){
+                return false
+            }
         }
+        
+        // if(formData.username.error || formData.password.error){
+        //     return false;
+        // }
         return true
     }
 
     function handleSubmit(evt) {
+        setLoading(true)
+        setFormError('')
+        dispatch(actAsyncLogin(username.value, password.value))
+        .then(res => {
+            if(res.ok){
+                console.log('Sucessful', res)
+            }else{
+                console.log('Error', res.error)
+                setFormError(res.error)
+            }
+
+            setLoading(false)
+        })
         evt.preventDefault();
         const isValid = checkFormIsValid(); 
         if(!isValid){
@@ -87,6 +122,7 @@ function Login() {
                             <div className="tcl-col-12 tcl-col-sm-6 block-center">
                                 <MainTitle>Đăng nhập</MainTitle>
                                 <div className="form-login-register">
+                                    <p className='form-login__error'>{formError}</p>
                                     <form action="true" onSubmit={handleSubmit}>
                                         <Input 
                                             Label="Tên đăng nhập"
@@ -106,7 +142,7 @@ function Login() {
                                             onChange={handleOnChange}
                                         />
                                         <div className="d-flex tcl-jc-between tcl-ais-center">
-                                            <Button type="primary" size="large">Đăng nhập</Button>
+                                            <Button Loading={loading} type="primary" size="large">Đăng nhập</Button>
                                             <Link to="/register">Đăng ký</Link>
                                         </div>
                                     </form>

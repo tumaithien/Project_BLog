@@ -1,5 +1,13 @@
+import { api } from "./api"
 
-
-const authServices ={
-    
+export const authServices ={
+    login({
+        username,
+        password
+    }){
+        return api.call().post('/jwt-auth/v1/token',{
+            username,
+            password
+        })
+    }
 }
