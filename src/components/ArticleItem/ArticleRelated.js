@@ -3,7 +3,6 @@ import './related-posts.css'
 function ArticleRelated() {
     return (
         <>
-            {/* Post Detail Tags */}
             <div className="post-detail__tags">
                 <h2>Tags</h2>
                 <ul>
@@ -13,7 +12,6 @@ function ArticleRelated() {
                     <li className="item"><a href="/" className="btn btn-default">Vue</a></li>
                 </ul>
             </div>
-            {/* End Post Detail Tags */}
         </>
     )
 }

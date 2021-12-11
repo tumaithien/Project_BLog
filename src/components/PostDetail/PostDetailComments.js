@@ -3,7 +3,6 @@ import './comments.css'
 function PostDetailComments() {
     return (
         <>
-            {/* Post Detail Comments */}
             <div className="post-detail__comments">
                 <div className="comments__form">
                     <div className="comments__form--control">
@@ -20,7 +19,6 @@ function PostDetailComments() {
                 </div>
                 <p>20 Comments</p>
                 <ul className="comments">
-                    {/* Comment 1 */}
                     <li className="item">
                         <div className="comments__section">
                             <div className="comments__section--avatar">
@@ -32,10 +30,9 @@ function PostDetailComments() {
                                 <a href="/" className="comments__section--user">John Smith</a>
                                 <p className="comments__section--time">2 minutes ago</p>
                                 <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem maiores, iusto unde quibusdam! Ullam nisi iste reprehenderit, expedita nam ad. Nisi hic at voluptate sint incidunt aut?</p>
-                                {/* <i class="ion-reply comments__section--reply"></i> */}
+                                
                             </div>
                         </div>
-                        {/* Reply Comments */}
                         <ul className="comments">
                             <li className="item">
                                 <div className="comments__section">
@@ -48,7 +45,6 @@ function PostDetailComments() {
                                         <a href="/" className="comments__section--user">John Smith</a>
                                         <p className="comments__section--time">2 minutes ago</p>
                                         <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit?</p>
-                                        {/* <i class="ion-reply comments__section--reply"></i> */}
                                     </div>
                                 </div>
                             </li>
@@ -63,12 +59,10 @@ function PostDetailComments() {
                                         <a href="/" className="comments__section--user">John Smith</a>
                                         <p className="comments__section--time">2 minutes ago</p>
                                         <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem ma?</p>
-                                        {/* <i class="ion-reply comments__section--reply"></i> */}
                                     </div>
                                 </div>
                             </li>
                         </ul>
-                        {/* Reply form */}
                         <div className="comments__form">
                             <div className="comments__form--control">
                                 <div className="comments__section--avatar">
@@ -83,7 +77,6 @@ function PostDetailComments() {
                             </div>
                         </div>
                     </li>
-                    {/* Comment 2 */}
                     <li className="item">
                         <div className="comments__section">
                             <div className="comments__section--avatar">
@@ -95,14 +88,12 @@ function PostDetailComments() {
                                 <a href="/" className="comments__section--user">John Smith</a>
                                 <p className="comments__section--time">2 minutes ago</p>
                                 <p className="comments__section--text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt sequi odit exercitationem maiores?</p>
-                                {/* <i class="ion-reply comments__section--reply"></i> */}
                             </div>
                         </div>
                         <div className="comments__hidden">
                             <a href="/"><i className="icons ion-ios-undo" /> Xem thêm 2 câu trả lời</a>
                         </div>
                     </li>
-                    {/* Comment 3 */}
                     <li className="item">
                         <div className="comments__section">
                             <div className="comments__section--avatar">
@@ -114,13 +105,11 @@ function PostDetailComments() {
                                 <a href="/" className="comments__section--user">John Smith</a>
                                 <p className="comments__section--time">2 minutes ago</p>
                                 <p className="comments__section--text">Lorem ipsum dolor sit, amet?</p>
-                                {/* <i class="ion-reply comments__section--reply"></i> */}
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-            {/* End Post Detail Comments */}
         </>
     )
 }
