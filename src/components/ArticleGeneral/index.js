@@ -13,7 +13,7 @@ function ArticleGeneral() {
           {/* Main Title */}
           <div className="main-title spacing d-flex tcl-jc-between tcl-ais-center">
             <h2>News List</h2>
-            <Button href="#" type="default" as="a">View More</Button>
+            <Button href="/" type="default" as="a">View More</Button>
           </div>
           {/* End Main Title */}
           {/* End Row News List */}

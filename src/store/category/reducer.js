@@ -4,6 +4,8 @@ const initState ={
     hashCategoryById: {}
 }
 
+
+
 function reducer(categoryState = initState, action) {
     switch (action.type) {
         case ACT_GET_CATEGORY:

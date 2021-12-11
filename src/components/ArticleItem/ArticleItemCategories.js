@@ -18,6 +18,9 @@ function ArticleItemCategories(
                 {
                     categoriesId.map(dataId => {
                         const category = hashCategoryById[dataId]
+                        if(!category){
+                            return null
+                        }
                         const slugLink = '/category/'+ category.slug
                         return (
                             <li key={category.id}>
