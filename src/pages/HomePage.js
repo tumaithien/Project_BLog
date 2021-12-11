@@ -18,8 +18,8 @@ function HomePage() {
   return (
     <>
       <ArticleLatest />
-      <ArticleGeneral />
       <ArticlePopular />
+      <ArticleGeneral />
     </>
   )
 }

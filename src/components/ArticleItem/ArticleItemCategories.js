@@ -1,6 +1,6 @@
 import './article-item.css'
-import cls from 'classnames'
 import { useSelector } from 'react-redux'
+import cls from 'classnames'
 import { Link } from 'react-router-dom'
 
 function ArticleItemCategories(
@@ -9,9 +9,9 @@ function ArticleItemCategories(
         categoriesId
     }
 ) {
-
-    const classes = cls('article-item__categories', className)
     const hashCategoryById = useSelector(state => state.Category.hashCategoryById)
+    const classes = cls('article-item__categories', className)
+    
     return (
         <>
             <ul className={classes}>
