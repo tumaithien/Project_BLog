@@ -7,27 +7,28 @@ import { useEffect, useState } from 'react'
 import { validateFormData } from '../../helpers'
 import { useDispatch } from 'react-redux'
 import { actAsyncLogin } from '../../store/auth/actions'
+import {useHistory} from 'react-router-dom'
 
 
 function Login() {
 
+    const history = useHistory()
     const dispatch = useDispatch();
 
-    const [isFormDirty, setIsFormDirty] = useState(true);
+    const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         username:{
-            value: 'tumaithien',
+            value: '',
             error: ''
         },
         password:{
-            value: '123456',
+            value: '',
             error: ''
         }
     });
     
-    const { username, password } = formData;
     
     
 
@@ -91,12 +92,22 @@ function Login() {
     }
 
     function handleSubmit(evt) {
+        const { username, password } = formData;
+        if(loading){
+            return
+        }
         setLoading(true)
         setFormError('')
+        evt.preventDefault();
+        const isValid = checkFormIsValid(); 
+        if(!isValid){
+            console.log('Form error');
+            return
+        }
         dispatch(actAsyncLogin(username.value, password.value))
         .then(res => {
             if(res.ok){
-                console.log('Sucessful', res)
+                history.push('/')
             }else{
                 console.log('Error', res.error)
                 setFormError(res.error)
@@ -104,13 +115,6 @@ function Login() {
 
             setLoading(false)
         })
-        evt.preventDefault();
-        const isValid = checkFormIsValid(); 
-        if(!isValid){
-            console.log('Form error');
-            return
-        }
-        console.log('submit thanh cong')
     }
 
     return (
@@ -122,7 +126,7 @@ function Login() {
                             <div className="tcl-col-12 tcl-col-sm-6 block-center">
                                 <MainTitle>Đăng nhập</MainTitle>
                                 <div className="form-login-register">
-                                    <p className='form-login__error'>{formError}</p>
+                                    { formError && <p className='form-login__error'>{formError}</p> }
                                     <form action="true" onSubmit={handleSubmit}>
                                         <Input 
                                             Label="Tên đăng nhập"

@@ -10,6 +10,7 @@ import IconLoading from '../IconLoading'
     className,
     size,
     htmlType,
+    onClick,
     children,
     ...restProps
  }){
@@ -36,6 +37,12 @@ import IconLoading from '../IconLoading'
             {Loading && LoadingPos === 'right' && <IconLoading />}
         </>
     );
+
+    // function _onClick(evt){
+    //     if(!Loading){
+    //        onClick && onClick(evt);
+    //     }
+    // }
 
     const injectedProps = {
         className: classes,
