@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
+import {actAsyncGetInfoUser} from './store/auth/actions'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(actAsyncAllCategory())
+    dispatch(actAsyncGetInfoUser())
   }, [dispatch])
   return (
     <Router>

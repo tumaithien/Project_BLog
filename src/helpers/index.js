@@ -1,3 +1,5 @@
+import { MESSAGE_ERROR } from "../constants"
+
 export function getQueryStr(name) {
     return new URLSearchParams(window.location.search).get(name)
 }
@@ -13,6 +15,16 @@ export function mappingPostData(list) {
         authorId: list.author,
         categoriesId: list.categories,
         viewCount: list.view_count
+    }
+}
+
+export function mappingCurrentUser(user) {
+    return {
+        id: user.id,
+        name: user.nickname,
+        email: user.email,
+        slug: user.slug,
+        avatar: user.avatar_urls[96],
     }
 }
 
@@ -37,12 +49,44 @@ export function validateFormData({ name, value }) {
     let error = ''
     
     if(name === 'username' && !value){
-        error = 'User name không để rỗng'
+        error = MESSAGE_ERROR.username_required
     }
 
     if(name === 'password' ){
-        if(!value) error = 'password không để rỗng'
-        else if(value.length < 6) error = 'password phải có ít nhất 6 ký tự'
+        if(!value) error = MESSAGE_ERROR.password_required
+        else if(value.length < 6) error = MESSAGE_ERROR.password_length
+        
+    }
+
+    return error
+}
+
+const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
+
+export function validateFormRegister({ name, value }) {
+    let error = ''
+    
+    if(name === 'username' && !value){
+        error = MESSAGE_ERROR.username_required
+    }
+
+    if(name === 'email'){
+        if(!value){
+            error = MESSAGE_ERROR.email_required
+        }else if(!validateEmail(value)){
+            error = MESSAGE_ERROR.rest_user_invalid_email
+        }
+        
+    }
+    if(name === 'password' ){
+        if(!value) error = MESSAGE_ERROR.password_required
+        else if(value.length < 6) error = MESSAGE_ERROR.password_length
         
     }
 
