@@ -4,10 +4,13 @@ import ArticleItem from '../components/ArticleItem'
 import Button from '../components/shared/Button'
 import { getQueryStr } from '../helpers'
 import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 function Search() {
     const location = useLocation();
     let locationStr = location.search;
     locationStr = getQueryStr('q');
+
+    const selector = useSelector(state => state.Post.articlesPopular)
 
     return (
         <div>
@@ -22,25 +25,21 @@ function Search() {
                             <ArticleItem 
                                 isStyleCard 
                                 isShowCategories 
-                                children="Bài viết mới nhất ngày 03/12/2021">
+                            >
                             </ArticleItem>
                         </div>
                     </div>
-                    <div className="tcl-row tcl-jc-center">
-                        <div className="tcl-col-12 tcl-col-md-8">
-                            <ArticleItem isStyleCard isShowCategories children="Bài viết mới nhất ngày 03/12/2021"></ArticleItem>
-                        </div>
-                    </div>
-                    <div className="tcl-row tcl-jc-center">
-                        <div className="tcl-col-12 tcl-col-md-8">
-                            <ArticleItem isStyleCard isShowCategories children="Bài viết mới nhất ngày 03/12/2021"></ArticleItem>
-                        </div>
-                    </div>
-                    <div className="tcl-row tcl-jc-center">
-                        <div className="tcl-col-12 tcl-col-md-8">
-                            <ArticleItem isStyleCard isShowCategories children="Bài viết mới nhất ngày 03/12/2021"></ArticleItem>
-                        </div>
-                    </div>
+                    {
+                        selector.map(dataItem => {
+                            return(
+                                <div className="tcl-row tcl-jc-center" key={dataItem.id}>
+                                    <div className="tcl-col-12 tcl-col-md-8">
+                                        <ArticleItem post={dataItem} isStyleCard isShowCategories></ArticleItem>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                     {/* End Row News List */}
                     {/* Btn Loadmore */}
                     <div className="text-center">

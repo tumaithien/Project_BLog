@@ -1,6 +1,6 @@
 //Action types
 
-import { ACCESS_TOKEN } from "../../constants"
+import { ACCESS_TOKEN, MESSAGE_ERROR } from "../../constants"
 import { mappingCurrentUser } from "../../helpers"
 import { authServices } from "../../services/auth"
 
@@ -61,6 +61,29 @@ export function actAsyncLogin(username, password){
             return {
                 ok: false,
                 error: 'Username hoặc password không hợp lệ'
+            }
+        }
+    }
+}
+
+export function actAsyncRegister({nickname, username, email, password}) {
+    return async dispatch => {
+        try {
+            const response = await authServices.register({username, nickname, email, password})
+            console.log('response', response)
+            return {
+                ok: true
+            }
+        } catch (error) {
+            window.MY_ERROR = error
+            let errorMessage = 'Có lỗi xảy ra vui lòng thử lại'
+            if(error && error.response.data && error.response.data.code ){
+                const errorData = error.response.data.code;
+                errorMessage = MESSAGE_ERROR[errorData]
+            }
+            return{
+                ok: false,
+                error: '???'
             }
         }
     }

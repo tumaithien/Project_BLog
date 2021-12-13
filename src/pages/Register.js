@@ -1,39 +1,37 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from '../components/shared/Button'
 import Input from '../components/shared/Input'
 import MainTitle from '../components/shared/MainTitle'
 import { validateFormRegister } from '../helpers'
+import { actAsyncRegister } from '../store/auth/actions'
 import './LoginPage/login.css'
 
 function Register() {
 
-
+    const dispatch = useDispatch()
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false)
-    const [isFormDirty, setFormDirty] = useState(false)
     const [formData, setFormData] = useState({
         username: {
-            value: '',
-            error: '',
-            isTouched : false
+            value: 'test05 ',
+            error: ''
         },
         password:{
-            value: '',
-            error: '',
-            isTouched : false
+            value: '123456',
+            error: ''
         },
         email:{
-            value: '',
-            error: '',
-            isTouched : false
+            value: 'test03@gmail.com',
+            error: ''
         },
         nickname:{
             value: '',
-            error: '',
-            isTouched : false
+            error: ''
         }
     })
+
 
     function handleOnChange(evt){
         const name = evt.target.name
@@ -43,60 +41,25 @@ function Register() {
         setFormData({
             ...formData,
             [name]:{
-                value, error, isTouched : true
+                value, error
             }
         })
         // setFormDirty(true)
+
+        console.log('formData', formData)
     }
 
     function checkFormValid() {
-        // if(!isFormDirty){
-        //     const newFormData = {
-        //         nickname:{
-        //             value: '',
-        //             error: validateFormRegister({
-        //                 value: '', name: 'nickname'
-        //             })
-        //         },
-        //         username:{
-        //             value: '',
-        //             error: validateFormRegister({
-        //                 value: '', name: 'username'
-        //             })
-        //         },
-        //         email:{
-        //             value: '',
-        //             error: validateFormRegister({
-        //                 value: '', name: 'email'
-        //             })
-        //         },
-        //         password:{
-        //             value: '',
-        //             error: validateFormRegister({
-        //                 value: '', name: 'password'
-        //             })
-        //         },
-        //     }
-
-        //     setFormData(newFormData)
-        //     return false
-        // }
         const newFormData = {}
         Object.keys(formData)
         .forEach(key => {
             const formValue = formData[key]
-
-            if(formValue.isTouched === false){
-                newFormData[key] = {
-                    value: '',
-                    isTouched: true,
-                    error: validateFormRegister({
-                        value: '',
-                        name: key
-                    })
-                }
-            }else{
-                newFormData[key] = formData[key]
+            newFormData[key] = {
+                value: formValue.value,
+                error: validateFormRegister({
+                    value: formValue.value,
+                    name: key
+                })
             }
         })
         setFormData(newFormData)
@@ -109,13 +72,33 @@ function Register() {
     }
 
     function handleSubmit(evt) {
+        const { username, password, email, nickname } = formData
+
         setFormError('')
+        setLoading(false)
         evt.preventDefault()
         const isValid = checkFormValid()
 
-        if(!isValid){
+        if(!isValid || loading){
             return
         }
+
+        setLoading(true)
+        setFormError('')
+
+        const actAsync = actAsyncRegister({
+            username: username.value,
+            nickname: nickname.value,
+            email: email.value,
+            password: password.value
+        })
+        dispatch(actAsync)
+        .then(res => {
+            if(!res.ok){
+                setFormError(res.error)
+            }
+            setLoading(false)
+        })
     }
 
     return (
@@ -159,7 +142,7 @@ function Register() {
                                         onChange={handleOnChange} 
                                     />
                                     <div className="d-flex tcl-jc-between tcl-ais-center">
-                                        <Button type="primary" size="large">Đăng ký</Button>
+                                        <Button Loading={loading} type="primary" size="large">Đăng ký</Button>
                                         <Link to="/login">Bạn đã có tài khoản?</Link>
                                     </div>
                                 </form>

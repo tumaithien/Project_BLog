@@ -14,6 +14,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
+import DemoPage from './pages/DemoPage'
 
 function App() {
 
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path="/post/:slug">
             <PostDetailsPage />
+          </Route>
+          <Route path="/demo">
+            <DemoPage />
           </Route>
           <Route path="/">
             <HomePage />

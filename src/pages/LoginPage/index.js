@@ -15,21 +15,21 @@ function Login() {
     const history = useHistory()
     const dispatch = useDispatch();
 
-    const [isFormDirty, setIsFormDirty] = useState(false);
+    // const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         username:{
             value: '',
-            error: ''
+            error: '',
+            isTouched: false
         },
         password:{
             value: '',
-            error: ''
+            error: '',
+            isTouched: false
         }
     });
-    
-    
     
 
     function handleOnChange(evt) {
@@ -40,44 +40,52 @@ function Login() {
             ...formData,
             [name]: {
                 value,
-                error
+                error,
+                isTouched : true
             }
         })
-        setIsFormDirty(true)
+        // setIsFormDirty(true)
     }
     
     function checkFormIsValid() {
-        if(!isFormDirty){
-            // for(const key in formData){
-            //     setFormData(
-            //         {
-            //         [key]:{
-            //             value: '',
-            //             error: validateFormData({
-            //                 value: '',
-            //                 name: `${key}`
-            //             })
-            //         }
-            //     })
-            // }
-            setFormData(
-                {
-                username:{
+        // if(!isFormDirty){
+        //     setFormData(
+        //         {
+        //         username:{
+        //             value: '',
+        //             error: validateFormData({
+        //                 value: '',
+        //                 name: 'username'
+        //             })
+        //         },
+        //         password:{
+        //             value: '',
+        //             error: validateFormData({
+        //                 value: '',
+        //                 name: 'password'
+        //             })
+        //         }
+        //     })
+        // }
+
+        const newFormData = {}
+        Object.keys(formData)
+        .forEach(key => {
+            const formValue = formData[key]
+
+            if(formValue.isTouched === false){
+                newFormData[key] = {
                     value: '',
                     error: validateFormData({
                         value: '',
-                        name: 'username'
-                    })
-                },
-                password:{
-                    value: '',
-                    error: validateFormData({
-                        value: '',
-                        name: 'password'
+                        name: key
                     })
                 }
-            })
-        }
+            }else{
+                newFormData[key] = formData[key]
+            }
+        })
+        setFormData(newFormData)
 
         for(const key in formData){
             if(formData[key].error){

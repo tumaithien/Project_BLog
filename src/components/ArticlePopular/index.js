@@ -5,7 +5,6 @@ import { useSelector } from "react-redux"
 
 function ArticlePopular() {
     const selectorPostPopular = useSelector(state => state.Post.articlesPopular)
-    console.log(selectorPostPopular)
 
     return (
         <>
