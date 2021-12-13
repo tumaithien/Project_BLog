@@ -17,5 +17,5 @@ export const MESSAGE_ERROR = {
     username_required: 'Tên đăng nhập không để rỗng',
 
 
-
+    default: 'Có lỗi xảy ra vui lòng quay lại sau!'
 }

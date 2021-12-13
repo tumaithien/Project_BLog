@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import Button from '../components/shared/Button'
 import Input from '../components/shared/Input'
 import MainTitle from '../components/shared/MainTitle'
 import { validateFormRegister } from '../helpers'
+import { useNotAuthenticated } from '../hook/useNotAuthenticated'
 import { actAsyncRegister } from '../store/auth/actions'
 import './LoginPage/login.css'
 
 function Register() {
 
+    useNotAuthenticated()
+    const history = useHistory()
     const dispatch = useDispatch()
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -45,8 +48,6 @@ function Register() {
             }
         })
         // setFormDirty(true)
-
-        console.log('formData', formData)
     }
 
     function checkFormValid() {
@@ -94,7 +95,9 @@ function Register() {
         })
         dispatch(actAsync)
         .then(res => {
-            if(!res.ok){
+            if(res.ok){
+                history.push('/')
+            }else{
                 setFormError(res.error)
             }
             setLoading(false)

@@ -38,7 +38,7 @@ export function actAsyncGetInfoUser(token){
                 ok: true
             }
         } catch (error) {
-            localStorage.removeItem(ACCESS_TOKEN)
+            dispatch(actLogOut())
             return{
                 ok: false,
                 error: 'Có lỗi xảy ra từ hệ thống, vui lòng quay lại sau'
@@ -60,7 +60,7 @@ export function actAsyncLogin(username, password){
         } catch (error) {
             return {
                 ok: false,
-                error: 'Username hoặc password không hợp lệ'
+                error: 'User name hoặc password không hợp lệ'
             }
         }
     }
@@ -70,20 +70,24 @@ export function actAsyncRegister({nickname, username, email, password}) {
     return async dispatch => {
         try {
             const response = await authServices.register({username, nickname, email, password})
-            console.log('response', response)
-            return {
-                ok: true
+            const responseLogin = await dispatch(actAsyncLogin(username, password))
+            if(responseLogin.ok){
+                return { ok:true }
             }
+            throw new Error(MESSAGE_ERROR.default)
         } catch (error) {
             window.MY_ERROR = error
-            let errorMessage = 'Có lỗi xảy ra vui lòng thử lại'
-            if(error && error.response.data && error.response.data.code ){
+            let errorMessage = MESSAGE_ERROR.default
+            if(error && error.response && error.response.data.code ){
                 const errorData = error.response.data.code;
-                errorMessage = MESSAGE_ERROR[errorData]
+                errorMessage = MESSAGE_ERROR[errorData] //falseback value
+                if(MESSAGE_ERROR[errorData]){
+                    errorMessage = MESSAGE_ERROR[errorData]
+                }
             }
             return{
                 ok: false,
-                error: '???'
+                error: errorMessage
             }
         }
     }

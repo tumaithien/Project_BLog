@@ -8,13 +8,14 @@ import { validateFormData } from '../../helpers'
 import { useDispatch } from 'react-redux'
 import { actAsyncLogin } from '../../store/auth/actions'
 import {useHistory} from 'react-router-dom'
+import { useNotAuthenticated } from '../../hook/useNotAuthenticated'
 
 
 function Login() {
 
+    useNotAuthenticated()
     const history = useHistory()
     const dispatch = useDispatch();
-
     // const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false);
@@ -31,7 +32,6 @@ function Login() {
         }
     });
     
-
     function handleOnChange(evt) {
         const name = evt.target.name;
         const value = evt.target.value;

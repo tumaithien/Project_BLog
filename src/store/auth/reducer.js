@@ -4,7 +4,7 @@ import { ACT_LOGIN_SUCCESS, ACT_LOGOUT } from "./actions";
 
 const initState = {
     currentUser: null,
-    token: ''
+    token: localStorage.getItem(ACCESS_TOKEN)
 }
 
 function reducer(authState =initState, action) {
