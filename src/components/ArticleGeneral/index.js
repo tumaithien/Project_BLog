@@ -1,11 +1,25 @@
 import ArticleItem from "../ArticleItem";
 import Button from "../shared/Button"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react";
+import { actAsyncGetArticleGeneral } from "../../store/post/actions";
 
 function ArticleGeneral() {
 
-  const selectorPostGeneral = useSelector(state => state.Post.articlesGeneral);
-
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const { list: selectorPostGeneral, currentPage } = useSelector(state => state.Post.articlePaging)
+  function handleClickLoadMore() {
+    if(loading){
+      return
+    }
+    setLoading(true)
+    dispatch(actAsyncGetArticleGeneral({
+      currentPage: currentPage + 1
+    })).then(() => {
+      setLoading(false)
+    })
+  }
   return (
     <>
       <div className="articles-list section">
@@ -31,7 +45,13 @@ function ArticleGeneral() {
           {/* End Row News List */}
           {/* Btn Loadmore */}
           <div className="text-center">
-            <Button type="primary" size="large">Xem Thêm</Button>
+            <Button
+              type="primary" 
+              size="large"
+              Loading={loading}
+              onClick={handleClickLoadMore}
+              >Xem Thêm
+            </Button>
           </div>
         </div>
       </div>

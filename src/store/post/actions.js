@@ -20,25 +20,28 @@ export function actAsyncGetArticleLastest(){
             const response = await postServices.getArticleLastest();
             const posts = response.data.map(mappingPostData);
             dispatch(actGetArticleLastest(posts))
-        }
+        } 
         catch(error){
             //Bắt lỗi
         }
     }
 }
-export function actGetArticleGeneral(generalPost) {
+export function actGetArticleGeneral({generalPosts, currentPage}) {
     return{
         type: ACT_GET_ARTICLE_GENERAL,
-        payload:{generalPost}
+        payload:{generalPosts , currentPage}
     }
 }
 
-export function actAsyncGetArticleGeneral() {
+export function actAsyncGetArticleGeneral({
+    currentPage = 1, perPage = 2
+} = {}) {
     return async (dispatch) =>{
         try{
-            const response = await postServices.getArticleGeneral();
+            const response = await postServices.getArticleGeneral({currentPage, perPage});
             const generalPosts = response.data.map(mappingPostData);
-            dispatch(actGetArticleGeneral(generalPosts))
+            console.log('generalPosts', generalPosts)
+            dispatch(actGetArticleGeneral({generalPosts, currentPage}))
         }
         catch(error){
 

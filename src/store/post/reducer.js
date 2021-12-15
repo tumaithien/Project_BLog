@@ -4,8 +4,12 @@ import { ACT_GET_ARTICLE_GENERAL, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPUL
 
 const initState = {
   articlesLatest: [],
-  articlesGeneral: [],
-  articlesPopular: []
+  articlesPopular: [],
+  // articlesGeneral: []
+  articlePaging:{
+    list: [],
+    currentPage: 1,
+  }
 }
 
 
@@ -19,7 +23,17 @@ function reducer(postState = initState, action) {
     case ACT_GET_ARTICLE_GENERAL:
       return {
         ...postState,
-        articlesGeneral: action.payload.generalPost
+        articlePaging: {
+          ...postState.articlePaging,
+          list: action.payload.currentPage === 1 
+          ? action.payload.generalPosts 
+          : [
+            ...postState.articlePaging.list,
+            ...action.payload.generalPosts
+          ]
+          ,
+          currentPage: action.payload.currentPage
+        }
       }
     case ACT_GET_ARTICLE_POPULAR:
       return {

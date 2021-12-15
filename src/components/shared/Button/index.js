@@ -10,7 +10,6 @@ import IconLoading from '../IconLoading'
     className,
     size,
     htmlType,
-    onClick,
     children,
     ...restProps
  }){

@@ -14,7 +14,8 @@ export function mappingPostData(list) {
         createDate: list.date,
         authorId: list.author,
         categoriesId: list.categories,
-        viewCount: list.view_count
+        viewCount: list.view_count,
+        shortDecsHTML: list.excerpt.rendered
     }
 }
 

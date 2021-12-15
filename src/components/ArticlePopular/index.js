@@ -19,12 +19,12 @@ function ArticlePopular() {
                             <div className="popular-news__list--row">
                                 {/* Popular news card */}
                                 <div className="popular-news__list--card">
-                                    <ArticleItem isShowStar isStyleCard isShowCategories post={selectorPostPopular[0]} />
+                                    <ArticleItem isShowDecs isShowStar isStyleCard isShowCategories post={selectorPostPopular[0]} />
                                 </div>
                                 {/* End Popular news card */}
                                 {/* Popular news card */}
                                 <div className="popular-news__list--card">
-                                    <ArticleItem isStyleCard isShowStar isShowCategories post={selectorPostPopular[1]} />
+                                    <ArticleItem isShowDecs isStyleCard isShowStar isShowCategories post={selectorPostPopular[1]} />
                                 </div>
                                 {/* End Popular news card */}
                             </div>
@@ -33,7 +33,7 @@ function ArticlePopular() {
                             <div className="popular-news__list--row">
                                 {/* Popular news card */}
                                 <div className="popular-news__list--card">
-                                <ArticleItem isStyleCard isStyleRow isShowCategories post={selectorPostPopular[2]} />
+                                <ArticleItem isStyleCard isShowDecs isStyleRow isShowCategories post={selectorPostPopular[2]} />
                                 </div>
                                 {/* End Popular news card */}
                             </div>

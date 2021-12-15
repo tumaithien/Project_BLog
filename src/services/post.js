@@ -17,10 +17,13 @@ const postServices ={
         })
     },
 
-    getArticleGeneral(){
+    getArticleGeneral({
+        currentPage = 1,
+        perPage =2
+    }){
         return postServices.getList({
-            per_page: 3,
-            page: 1
+            per_page: perPage,
+            page: currentPage
         })
     },
     getArticlePopular(){

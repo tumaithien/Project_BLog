@@ -29,10 +29,9 @@ function ArticleItem(
     if(!post){
         return null
     }
-    const { slug, title, author, createDate, thumb, author_id, categoriesId, viewCount } = post
+    const { slug, title, author, createDate, thumb, author_id, categoriesId, viewCount, shortDecsHTML } = post
     const slugLink = '/post/' + slug
     const slugAuthor = '/user/' + author_id
-    console.log('viewCount', viewCount)
 
     return (
         <>
@@ -42,7 +41,7 @@ function ArticleItem(
                     {isShowCategories && <ArticleItemCategories categoriesId={categoriesId} />}
                     {isShowStar && <ArticleItemStar viewCount={viewCount} />}
                         <ArticleItemTitle children={title} slugLink={slugLink} />
-                    {isShowDecs && <ArticleItemDesc />}
+                    {isShowDecs && <ArticleItemDesc shortDecsHTML={shortDecsHTML} />}
                     <ArticleItemInfo 
                         createDate={createDate} 
                         author={author} 
