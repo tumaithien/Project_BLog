@@ -23,4 +23,4 @@
   - Input
   - ArticleItem
 
-- Khi muốn tạo user không cần đăng nhập trước thì dispatch actLogout trong res.ok để logout user khi được khởi tạo
+- Khi muốn tạo user không cần đăng nhập trước thì dispatch actLogout khi res.ok trả về thông tin để logout user khi được khởi tạo

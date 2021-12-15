@@ -18,8 +18,9 @@ export function actAsyncAllCategory() {
         try {
             const response = await categoryService.getList()
             const categories = response.data
-            console.log(categories)
+            
             const hashCategoryById = handleHashCategory(categories)
+            console.log('hashCategoryById', hashCategoryById)
             dispatch(actGetAllCategory(hashCategoryById))
         } catch (error) {
             

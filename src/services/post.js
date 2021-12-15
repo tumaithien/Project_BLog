@@ -19,7 +19,7 @@ const postServices ={
 
     getArticleGeneral(){
         return postServices.getList({
-            per_page: 5,
+            per_page: 3,
             page: 1
         })
     },

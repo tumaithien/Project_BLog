@@ -4,7 +4,7 @@ import ArticleItemAvatar from './ArticleItemAvatar'
 import { Link } from 'react-router-dom'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import dayjs from 'dayjs'
-import localeVi from 'dayjs/locale/vi' 
+import localeVi from 'dayjs/locale/vi'
 import { DATE_TEMPLATE } from '../../constants'
 
 dayjs.locale(localeVi)

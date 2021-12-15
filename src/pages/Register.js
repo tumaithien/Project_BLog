@@ -74,7 +74,6 @@ function Register() {
 
     function handleSubmit(evt) {
         const { username, password, email, nickname } = formData
-
         setFormError('')
         setLoading(false)
         evt.preventDefault()
