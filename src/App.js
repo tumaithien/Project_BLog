@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import DemoPage from './pages/DemoPage'
+import { actAsyncGetMenu } from './store/menu/action'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
   useEffect(() => {
     dispatch(actAsyncAllCategory())
     dispatch(actAsyncGetInfoUser())
+    dispatch(actAsyncGetMenu())
   }, [dispatch])
   return (
     <Router>

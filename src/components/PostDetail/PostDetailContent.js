@@ -4,13 +4,11 @@ import ArticleRelated from '../ArticleItem/ArticleRelated'
 function PostDetailContent() {
     return (
         <>
-            {/* Post Detail Content */}
             <div className="post-detail__content">
                 <div className="thumbnail">
                     <img src="/assets/images/blog-detail.jpg" alt="blog-title" />
                 </div>
                 <div className="content-padding">
-                    {/* Post Detail rich text editor */}
                     <div className="rte">
                         <p>Markdown is a lightweight markup language with plain-text-formatting syntax. Its design allows it to be converted to many output formats, but the original tool by the same name only supports HTML. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.</p>
                         <h2>Emphasis</h2>
@@ -41,12 +39,10 @@ function PostDetailContent() {
                             </li>
                         </ol>
                     </div>
-                    {/* End Post Detail rich text editor */}
                     <ArticleRelated />
                     <PostDetailComments />
                 </div>
             </div>
-            {/* End Post Detail Content */}
         </>
     )
 }

@@ -20,7 +20,6 @@ export function actAsyncAllCategory() {
             const categories = response.data
             
             const hashCategoryById = handleHashCategory(categories)
-            console.log('hashCategoryById', hashCategoryById)
             dispatch(actGetAllCategory(hashCategoryById))
         } catch (error) {
             

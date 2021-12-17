@@ -40,7 +40,6 @@ export function actAsyncGetArticleGeneral({
         try{
             const response = await postServices.getArticleGeneral({currentPage, perPage});
             const generalPosts = response.data.map(mappingPostData);
-            console.log('generalPosts', generalPosts)
             dispatch(actGetArticleGeneral({generalPosts, currentPage}))
         }
         catch(error){

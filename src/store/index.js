@@ -2,6 +2,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux'
 import authReducer from './auth/reducer'
 import postReducer from './post/reducer'
 import categoryReducer from './category/reducer'
+import menuReducer from './menu/reducer'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 
@@ -9,7 +10,8 @@ import logger from 'redux-logger'
 const rootReducer = combineReducers({
     Post: postReducer,
     Authen: authReducer,
-    Category: categoryReducer
+    Category: categoryReducer,
+    Menu : menuReducer
 })
 
 const store = createStore(

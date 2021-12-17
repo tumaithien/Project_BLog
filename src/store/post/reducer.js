@@ -25,7 +25,7 @@ function reducer(postState = initState, action) {
         ...postState,
         articlePaging: {
           ...postState.articlePaging,
-          list: action.payload.currentPage === 1 
+          list: action.payload.currentPage === 1
           ? action.payload.generalPosts 
           : [
             ...postState.articlePaging.list,

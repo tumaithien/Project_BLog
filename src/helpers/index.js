@@ -19,6 +19,15 @@ export function mappingPostData(list) {
     }
 }
 
+export function mappingMenu(menu) {
+    return{
+        id: menu.ID,
+        slug: menu.url,
+        title: menu.post_title,
+        childrenItems: menu.child_items
+    }
+}
+
 export function mappingCurrentUser(user) {
     return {
         id: user.id,
@@ -27,6 +36,19 @@ export function mappingCurrentUser(user) {
         slug: user.slug,
         avatar: user.avatar_urls[96],
     }
+}
+
+export const mappingMainMenu = menuItem => {
+    const data ={
+        id: menuItem.ID,
+        slug: menuItem.url,
+        title: menuItem.post_title,
+        childrenItems: menuItem.child_items || []
+    }
+
+    data.childrenItems = data.childrenItems.map(mappingMainMenu)
+
+    return data
 }
 
 export function handleHashCategory(categories) {
