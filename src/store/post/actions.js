@@ -1,4 +1,4 @@
-import { mappingPostData } from '../../helpers'
+import { mappingPostData, mappingPostDetailData } from '../../helpers'
 import postServices from '../../services/post'
 
 export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
@@ -6,6 +6,10 @@ export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
 export const ACT_GET_ARTICLE_GENERAL = 'ACT_GET_ARTICLE_GENERAL'
 
 export const ACT_GET_ARTICLE_POPULAR = 'ACT_GET_ARTICLE_POPULAR'
+
+export const ACT_GET_POST_DETAIL = 'ACT_GET_POST_DETAIL'
+
+export const ACT_GET_RELATED_POST = 'ACT_GET_RELATED_POST'
 
 
 export function actGetArticleLastest(posts){
@@ -63,6 +67,59 @@ export function actAsyncGetArticlePopular() {
         }
         catch(error){
 
+        }
+    }
+}
+
+export function actGetPostDetails(post) {
+    return{
+        type: ACT_GET_POST_DETAIL,
+        payload: {post}
+    }
+}
+
+export function actGetRelatedPost(posts) {
+    return{
+        type: ACT_GET_RELATED_POST,
+        payload: {posts}
+    }
+}
+
+export function actAsyncGetPostDetails(slug) {
+    return async (dispatch) => {
+        try {
+            const response = await postServices.getDeTail(slug)
+            const post = response.data[0]
+            if(!post){
+                throw new Error('Page not found!')
+            }
+            const postId = post.id
+            const authorId = post.author
+            dispatch(actGetPostDetails(mappingPostDetailData(post)))
+            await dispatch(actGetAsyncRelatedPost({postId, authorId}))
+
+            return { ok: true }
+        } catch (error) {
+            return {
+                ok:false
+            }
+        }
+    }
+}
+
+export function actGetAsyncRelatedPost({postId, authorId}) {
+    return async (dispatch) => {
+        try {
+            const response = await postServices.getList({
+                author: authorId,
+                per_page: 3,
+                exclude: postId
+            })
+            const posts = response.data.map(mappingPostData)
+
+            dispatch(actGetRelatedPost(posts))
+        } catch (error) {
+            
         }
     }
 }

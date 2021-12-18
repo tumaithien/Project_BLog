@@ -2,13 +2,10 @@ import './article-item.css'
 import cls from 'classnames'
 import ArticleItemAvatar from './ArticleItemAvatar'
 import { Link } from 'react-router-dom'
-import relativeTime from 'dayjs/plugin/relativeTime'
-import dayjs from 'dayjs'
-import localeVi from 'dayjs/locale/vi'
-import { DATE_TEMPLATE } from '../../constants'
+import { formatRelativeDate } from '../../helpers/day'
 
-dayjs.locale(localeVi)
-dayjs.extend(relativeTime)
+
+
 function ArticleItemInfo(
     {
         className,
@@ -21,11 +18,7 @@ function ArticleItemInfo(
     }
 
 ){
-
-    const createDateObj = dayjs(createDate)
-    const dateFormated = createDateObj.format(DATE_TEMPLATE);
-
-    const dateRelated = createDateObj.fromNow();
+    const {dateFormated, dateRelative} = formatRelativeDate(createDate)
 
     const classes = cls('article-item__info',className)
     return(
@@ -47,7 +40,7 @@ function ArticleItemInfo(
                                 </path>
                             </svg>
                             &nbsp;
-                            {dateRelated}
+                            {dateRelative}
                         </div>
                     </div>
                 </div>

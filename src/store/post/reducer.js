@@ -1,4 +1,4 @@
-import { ACT_GET_ARTICLE_GENERAL, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR } from "./actions"
+import { ACT_GET_ARTICLE_GENERAL, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
 
 
 
@@ -9,7 +9,9 @@ const initState = {
   articlePaging:{
     list: [],
     currentPage: 1,
-  }
+  },
+  postDetai: null,
+  relatedPostByAuthor: []
 }
 
 
@@ -39,6 +41,16 @@ function reducer(postState = initState, action) {
       return {
         ...postState,
         articlesPopular: action.payload.popularPost
+      }
+    case ACT_GET_POST_DETAIL:
+      return {
+        ...postState,
+        postDetai: action.payload.post
+      }
+    case ACT_GET_RELATED_POST:
+      return {
+        ...postState,
+        relatedPostByAuthor: action.payload.posts
       }
     default:
       return postState

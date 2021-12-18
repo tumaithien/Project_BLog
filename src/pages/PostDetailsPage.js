@@ -2,9 +2,47 @@ import PostDetailSlidebar from "../components/PostDetail/PostDetailSlidebar"
 import PostDetailContent from "../components/PostDetail/PostDetailContent"
 import PostDetailHeader from "../components/PostDetail/PostDetailHeader"
 import { useParams } from "react-router"
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { actAsyncGetPostDetails } from "../store/post/actions";
+import IconLoading from "../components/shared/IconLoading";
+import PageNotFound from "./PageNotFound";
 function PostDetailsPage() {
     const params = useParams();
-    console.log('params', params)
+    const slug = params.slug;
+    const dispatch = useDispatch()
+    const [status, setStatus] = useState('loading')
+
+    useEffect(() => {
+        dispatch(actAsyncGetPostDetails(slug))
+        .then(res =>{
+            if(res.ok){
+                setStatus('success')
+            } else{
+                setStatus('error')
+            }
+        })
+    }, [slug, dispatch])
+    if(status === 'loading'){
+        return(
+            <div className="article-list section">
+                <div className="tcl-container">
+                    <div className="tcl-row tcl-jc-center">
+                        <IconLoading width="150px" />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    if(status === 'error'){
+        return(
+            <div className="tcl-container">
+                <PageNotFound />
+            </div>
+        )
+    }
+
     return (
         <>
             <main className="post-detail">

@@ -19,11 +19,13 @@ const postServices ={
 
     getArticleGeneral({
         currentPage = 1,
-        perPage =2
+        perPage =2,
+        ...restParam
     }){
         return postServices.getList({
             per_page: perPage,
-            page: currentPage
+            page: currentPage,
+            ...restParam
         })
     },
     getArticlePopular(){
@@ -31,6 +33,11 @@ const postServices ={
             per_page: 3,
             page: 1,
             orderby: 'post_views'
+        })
+    },
+    getDeTail(slug){
+        return postServices.getList({
+            slug
         })
     }
 }

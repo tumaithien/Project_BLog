@@ -19,6 +19,15 @@ export function mappingPostData(list) {
     }
 }
 
+export function mappingPostDetailData(post) {
+    return{
+        ...mappingPostData(post),
+        contet: post.content.rendered,
+        tagsId: post.tags,
+        commentCount: post.comment_count
+    }
+}
+
 export function mappingMenu(menu) {
     return{
         id: menu.ID,
@@ -114,4 +123,12 @@ export function validateFormRegister({ name, value }) {
     }
 
     return error
+}
+
+
+export function genUserLink(authorId) {
+    return `/user/${authorId}`
+}
+export function genPostLink(slug) {
+    return `/user/${slug}`
 }
