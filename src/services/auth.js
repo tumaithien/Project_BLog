@@ -20,5 +20,17 @@ export const authServices ={
         return api.call().post('/wp/v2/users/register',{
             username, nickname, email, password
         })
-    }
+    },
+    changePassword({password,newpassword, confirmnewpassword}){
+        return api.call().put('/wp/v2/users/password',{
+            newpassword, confirmnewpassword,
+        })
+    },
+    // getInfoCurrentUser(token){
+    //     return api.call().put('/wp/v2/users/password',{
+    //         headers: {
+    //             "Authorization" : 'Bearer ' + token
+    //         }
+    //     })
+    // }
 }

@@ -1,6 +1,6 @@
 import './related-posts.css'
 
-function ArticleRelated() {
+function TagsRelated() {
     return (
         <>
             <div className="post-detail__tags">
@@ -16,4 +16,4 @@ function ArticleRelated() {
     )
 }
 
-export default ArticleRelated
+export default TagsRelated

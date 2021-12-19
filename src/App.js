@@ -16,6 +16,7 @@ import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import DemoPage from './pages/DemoPage'
 import { actAsyncGetMenu } from './store/menu/action'
+import ChangePassPage from './pages/ChangePassPage'
 
 function App() {
 
@@ -36,6 +37,9 @@ function App() {
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/change-pass">
+            <ChangePassPage />
           </Route>
           <Route path="/search">
             <Search />

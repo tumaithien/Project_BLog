@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { actLogOut } from '../../store/auth/actions';
@@ -28,6 +27,7 @@ function HeaderMenu() {
                                 </Link>
                                 <ul>
                                     <li><a href='/' onClick={handleLogout}>Logout</a></li>
+                                    <li><Link to="/change-pass">Change Password</Link></li>
                                 </ul>
                             </li>) : (<li className="user">
                                 <Link to="/login"><i className="icons ion-person" />

@@ -1,20 +1,22 @@
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import { genUserLink } from "../../helpers"
 import { formatRelativeDate } from "../../helpers/day"
 
 
 function PostDetailHeader() {
-    const postDetailSelector = useSelector(state => state.Post.postDetai)
+    const postDetailSelector = useSelector(state => state.Post.postDetail)
+    console.log('postDetailSelector', postDetailSelector)
     const {id, commentCount, author, authorId, title, viewCount, createDate} = postDetailSelector
-    const {dateFormated, dateRelative} = formatRelativeDate(createDate)
+    const {dateFormated} = formatRelativeDate(createDate)
     return(
         <>
-            {/* Post Detail Head */}
             <div className="post-detail__head">
                     <div className="tcl-container">
                         <h1 className="post-detail__title">{title}</h1>
                         <ul className="post-detail__info">
                             <li className="item author">
-                                By <a href="/"><strong>{author.nickname}</strong></a>
+                                Bởi <Link to={genUserLink(authorId)}><strong>{author.nickname}</strong></Link>
                             </li>
                             <li className="item date">
                                 {dateFormated}
@@ -28,7 +30,6 @@ function PostDetailHeader() {
                         </ul>
                     </div>
                 </div>
-                {/* End Post Detail Head */}
         </>
     )
 }

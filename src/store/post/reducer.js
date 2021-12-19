@@ -10,7 +10,7 @@ const initState = {
     list: [],
     currentPage: 1,
   },
-  postDetai: null,
+  postDetail: null,
   relatedPostByAuthor: []
 }
 
@@ -45,7 +45,7 @@ function reducer(postState = initState, action) {
     case ACT_GET_POST_DETAIL:
       return {
         ...postState,
-        postDetai: action.payload.post
+        postDetail: action.payload.post
       }
     case ACT_GET_RELATED_POST:
       return {

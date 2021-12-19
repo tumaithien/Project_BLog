@@ -5,7 +5,8 @@ import { mappingCurrentUser } from "../../helpers"
 import { authServices } from "../../services/auth"
 
 export const ACT_LOGIN_SUCCESS = 'ACT_LOGIN_SUCCESS'
-export const ACT_LOGOUT = ' ACT_LOGOUT'
+export const ACT_LOGOUT = 'ACT_LOGOUT'
+export const ACT_CHANGE_PASSWORD = 'ACT_CHANGE_PASSWORD'
 //Action
 export function actLoginSuccess({user, token}){
     return{
@@ -21,6 +22,10 @@ export function actLogOut() {
     return {
         type: ACT_LOGOUT
     }
+}
+
+export function actChangePassword({newpassword, confirmnewpassword, token}) {
+    
 }
 
 //Action Async
@@ -70,6 +75,7 @@ export function actAsyncRegister({nickname, username, email, password}) {
     return async dispatch => {
         try {
             const response = await authServices.register({username, nickname, email, password})
+            console.log('response', response)
             const responseLogin = await dispatch(actAsyncLogin(username, password))
             if(responseLogin.ok){
                 return { ok:true }
@@ -92,3 +98,25 @@ export function actAsyncRegister({nickname, username, email, password}) {
         }
     }
 }
+
+export function actAsyncGetInfoCurrentUser(token) {
+    return async dispatch => {
+        try {
+            const response = await authServices.getInfoCurrentUser(token)
+            const user = mappingCurrentUser(response.data)
+            console.log(user)
+        } catch (error) {
+            
+        }
+    }
+}
+
+// export function actAsyncGetPassword(password, newpassword, confirmnewpassword) {
+//     return async dispatch => {
+//         try {
+            
+//         } catch (error) {
+            
+//         }
+//     }
+// }

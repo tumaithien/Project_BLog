@@ -1,5 +1,5 @@
 import { ACCESS_TOKEN } from "../../constants";
-import { ACT_LOGIN_SUCCESS, ACT_LOGOUT } from "./actions";
+import { ACT_CHANGE_PASSWORD, ACT_LOGIN_SUCCESS, ACT_LOGOUT } from "./actions";
 
 
 const initState = {
