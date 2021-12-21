@@ -37,9 +37,9 @@ function PostDetailsPage() {
 
     if(status === 'error'){
         return(
-            <div className="tcl-container">
+            <>
                 <PageNotFound />
-            </div>
+            </>
         )
     }
 

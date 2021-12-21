@@ -17,6 +17,7 @@ import {actAsyncGetInfoUser} from './store/auth/actions'
 import DemoPage from './pages/DemoPage'
 import { actAsyncGetMenu } from './store/menu/action'
 import ChangePassPage from './pages/ChangePassPage'
+import PageNotFound from './pages/PageNotFound'
 
 function App() {
 
@@ -50,8 +51,11 @@ function App() {
           <Route path="/demo">
             <DemoPage />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/">
+            <PageNotFound />
           </Route>
         </Switch>
         <div className="spacing" />
