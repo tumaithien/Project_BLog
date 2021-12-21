@@ -7,7 +7,7 @@ import { formatRelativeDate } from "../../helpers/day"
 function PostDetailHeader() {
     const postDetailSelector = useSelector(state => state.Post.postDetail)
     console.log('postDetailSelector', postDetailSelector)
-    const {id, commentCount, author, authorId, title, viewCount, createDate} = postDetailSelector
+    const { commentCount, author, authorId, title, viewCount, createDate} = postDetailSelector
     const {dateFormated} = formatRelativeDate(createDate)
     return(
         <>

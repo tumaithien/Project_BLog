@@ -7,7 +7,7 @@ import { genUserLink } from "../../helpers"
 function PostDetailAuthor() {
 
     const post = useSelector(state => state.Post.postDetail)
-    const {id, author, authorId} = post
+    const { author, authorId} = post
     const{nickname, description, avatar} = author
     const authorLink = genUserLink(authorId)
     return (
