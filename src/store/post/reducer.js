@@ -28,12 +28,14 @@ function reducer(postState = initState, action) {
         articlePaging: {
           ...postState.articlePaging,
           list: action.payload.currentPage === 1
-          ? action.payload.generalPosts 
+          ? action.payload.generalPosts
           : [
             ...postState.articlePaging.list,
             ...action.payload.generalPosts
           ]
           ,
+          total: action.payload.total,
+          totalPages: action.payload.totalPages,
           currentPage: action.payload.currentPage
         }
       }

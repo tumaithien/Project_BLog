@@ -30,10 +30,15 @@ export function actAsyncGetArticleLastest(){
         }
     }
 }
-export function actGetArticleGeneral({generalPosts, currentPage}) {
+export function actGetArticleGeneral({generalPosts, currentPage, total, totalPages}) {
     return{
         type: ACT_GET_ARTICLE_GENERAL,
-        payload:{generalPosts , currentPage}
+        payload:{
+            generalPosts,
+            currentPage,
+            total,
+            totalPages
+        }
     }
 }
 
@@ -43,8 +48,17 @@ export function actAsyncGetArticleGeneral({
     return async (dispatch) =>{
         try{
             const response = await postServices.getArticleGeneral({currentPage, perPage});
+            const total= Number(response.headers['x-wp-total'])
+            const totalPages = Number(response.headers['x-wp-totalpages'])
             const generalPosts = response.data.map(mappingPostData);
-            dispatch(actGetArticleGeneral({generalPosts, currentPage}))
+            dispatch(actGetArticleGeneral(
+                    {
+                        generalPosts, 
+                        currentPage,
+                        total,
+                        totalPages
+                    }
+                ))
         }
         catch(error){
 

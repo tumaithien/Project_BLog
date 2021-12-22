@@ -1,14 +1,24 @@
-import ArticleItem from "../ArticleItem";
-import Button from "../shared/Button"
+
 import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react";
+
+import ArticleItem from "../ArticleItem";
+import Button from "../shared/Button"
+
 import { actAsyncGetArticleGeneral } from "../../store/post/actions";
 
 function ArticleGeneral() {
 
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const { list: selectorPostGeneral, currentPage } = useSelector(state => state.Post.articlePaging)
+  const { 
+    list: selectorPostGeneral,
+     currentPage,
+     totalPages
+    } = useSelector(state => state.Post.articlePaging)
+
+    const hasMorePosts = currentPage < totalPages
+
   function handleClickLoadMore() {
     if(loading){
       return
@@ -44,15 +54,19 @@ function ArticleGeneral() {
           </div>
           {/* End Row News List */}
           {/* Btn Loadmore */}
-          <div className="text-center">
-            <Button
-              type="primary" 
-              size="large"
-              Loading={loading}
-              onClick={handleClickLoadMore}
-              >Xem Thêm
-            </Button>
-          </div>
+          {
+            hasMorePosts && (
+              <div className="text-center">
+                <Button
+                  type="primary" 
+                  size="large"
+                  Loading={loading}
+                  onClick={handleClickLoadMore}
+                  >Xem Thêm
+                </Button>
+              </div>
+            )
+          }
         </div>
       </div>
 
