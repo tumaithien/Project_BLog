@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import DemoPage from './pages/DemoPage'
-import { actAsyncGetMenu } from './store/menu/action'
+import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
 import ChangePassPage from './pages/ChangePassPage'
 import PageNotFound from './pages/PageNotFound'
 
@@ -27,6 +27,7 @@ function App() {
     dispatch(actAsyncAllCategory())
     dispatch(actAsyncGetInfoUser())
     dispatch(actAsyncGetMenu())
+    dispatch(actAsyncGetMenuFooter())
   }, [dispatch])
   return (
     <Router>

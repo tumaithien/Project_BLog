@@ -1,12 +1,13 @@
 //Action types
+import {ACT_CHANGE_PASSWORD, ACT_LOGIN_SUCCESS, ACT_LOGOUT} from "../auth/actionTypes"
 
 import { ACCESS_TOKEN, MESSAGE_ERROR } from "../../constants"
+
 import { mappingCurrentUser } from "../../helpers"
 import { authServices } from "../../services/auth"
 
-export const ACT_LOGIN_SUCCESS = 'ACT_LOGIN_SUCCESS'
-export const ACT_LOGOUT = 'ACT_LOGOUT'
-export const ACT_CHANGE_PASSWORD = 'ACT_CHANGE_PASSWORD'
+
+
 //Action
 export function actLoginSuccess({user, token}){
     return{
@@ -24,9 +25,6 @@ export function actLogOut() {
     }
 }
 
-export function actChangePassword({newpassword, confirmnewpassword, token}) {
-    
-}
 
 //Action Async
 export function actAsyncGetInfoUser(token){
@@ -56,6 +54,7 @@ export function actAsyncLogin(username, password){
     return async dispatch => {
         try {
             const response = await authServices.login({username, password})
+            console.log('response', response)
             const token = response.data.token
             const preponseMe = await dispatch(actAsyncGetInfoUser(token))
             return{
@@ -99,24 +98,24 @@ export function actAsyncRegister({nickname, username, email, password}) {
     }
 }
 
-export function actAsyncGetInfoCurrentUser(token) {
+export function actChangePassword({
+    newPassword, token
+}) {
+    return {
+        type: ACT_CHANGE_PASSWORD,
+        payload: {
+            newPassword,
+            token
+        }
+    }
+}
+
+export function actAsyncChangePassword({password, newPassword, token}) {
     return async dispatch => {
         try {
-            const response = await authServices.getInfoCurrentUser(token)
-            const user = mappingCurrentUser(response.data)
-            console.log(user)
+            const response = authServices.changePassword({password, newPassword, token})
         } catch (error) {
             
         }
     }
 }
-
-// export function actAsyncGetPassword(password, newpassword, confirmnewpassword) {
-//     return async dispatch => {
-//         try {
-            
-//         } catch (error) {
-            
-//         }
-//     }
-// }

@@ -1,9 +1,10 @@
+
 import { mappingPostData, mappingPostDetailData } from '../../helpers'
 import postServices from '../../services/post'
 
 export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
 
-export const ACT_GET_ARTICLE_GENERAL = 'ACT_GET_ARTICLE_GENERAL'
+export const ACT_GET_ARTICLES = 'ACT_GET_ARTICLES'
 
 export const ACT_GET_ARTICLE_POPULAR = 'ACT_GET_ARTICLE_POPULAR'
 
@@ -24,15 +25,23 @@ export function actAsyncGetArticleLastest(){
             const response = await postServices.getArticleLastest();
             const posts = response.data.map(mappingPostData);
             dispatch(actGetArticleLastest(posts))
+            return {ok: true}
         } 
         catch(error){
-            //Bắt lỗi
+            return {
+                ok: false
+            }
         }
     }
 }
-export function actGetArticleGeneral({generalPosts, currentPage, total, totalPages}) {
+export function actGetArticles({
+    generalPosts, 
+    currentPage, 
+    total, 
+    totalPages
+}) {
     return{
-        type: ACT_GET_ARTICLE_GENERAL,
+        type: ACT_GET_ARTICLES,
         payload:{
             generalPosts,
             currentPage,
@@ -42,16 +51,22 @@ export function actGetArticleGeneral({generalPosts, currentPage, total, totalPag
     }
 }
 
-export function actAsyncGetArticleGeneral({
-    currentPage = 1, perPage = 2
+export function actAsyncGetArticles({
+    currentPage = 1, 
+    perPage = 2,
+    ...restParam
 } = {}) {
     return async (dispatch) =>{
         try{
-            const response = await postServices.getArticleGeneral({currentPage, perPage});
+            const response = await postServices.getArticle({
+                currentPage, 
+                perPage,
+                ...restParam
+            });
             const total= Number(response.headers['x-wp-total'])
             const totalPages = Number(response.headers['x-wp-totalpages'])
             const generalPosts = response.data.map(mappingPostData);
-            dispatch(actGetArticleGeneral(
+            dispatch(actGetArticles(
                     {
                         generalPosts, 
                         currentPage,
@@ -59,9 +74,12 @@ export function actAsyncGetArticleGeneral({
                         totalPages
                     }
                 ))
+            return {ok: true}
         }
         catch(error){
-
+            return {
+                ok: false
+            }
         }
     }
 }
@@ -78,9 +96,14 @@ export function actAsyncGetArticlePopular() {
             const response = await postServices.getArticlePopular();
             const popularPosts = response.data.map(mappingPostData);
             dispatch(actGetArticlePopular(popularPosts))
+            return {
+                ok: true
+            }
         }
         catch(error){
-
+            return {
+                ok: false
+            }
         }
     }
 }
@@ -92,12 +115,6 @@ export function actGetPostDetails(post) {
     }
 }
 
-export function actGetRelatedPost(posts) {
-    return{
-        type: ACT_GET_RELATED_POST,
-        payload: {posts}
-    }
-}
 
 export function actAsyncGetPostDetails(slug) {
     return async (dispatch) => {
@@ -111,13 +128,19 @@ export function actAsyncGetPostDetails(slug) {
             const authorId = post.author
             dispatch(actGetPostDetails(mappingPostDetailData(post)))
             await dispatch(actGetAsyncRelatedPost({postId, authorId}))
-
             return { ok: true }
         } catch (error) {
             return {
                 ok:false
             }
         }
+    }
+}
+
+export function actGetRelatedPost(posts) {
+    return{
+        type: ACT_GET_RELATED_POST,
+        payload: {posts}
     }
 }
 

@@ -1,4 +1,4 @@
-import { ACT_GET_ARTICLE_GENERAL, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
+import { ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
 
 
 
@@ -22,7 +22,7 @@ function reducer(postState = initState, action) {
         ...postState,
         articlesLatest: action.payload.posts
       }
-    case ACT_GET_ARTICLE_GENERAL:
+    case ACT_GET_ARTICLES:
       return {
         ...postState,
         articlePaging: {

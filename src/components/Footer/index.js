@@ -1,6 +1,11 @@
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './footer.css'
 
 function Footer() {
+
+    const menuFooter = useSelector(state => state.Menu.menuFooter)
+
     return (
         <footer id="footer" className="bg-white">
             <div className="tcl-container">
@@ -20,10 +25,19 @@ function Footer() {
                                 <p>Categories</p>
                             </div>
                             <ul className="footer-content__list">
-                                <li><a href="/">ReactJs</a></li>
-                                <li><a href="/">Javascript</a></li>
-                                <li><a href="/">Angular</a></li>
-                                <li><a href="/">HTML, HTML5</a></li>
+                                {
+                                    menuFooter.map(dataItem => {
+                                        return(
+                                            <li key={dataItem.id}>
+                                                {
+                                                    dataItem.slug.startsWith('http') ?
+                                                    <a href={dataItem.slug} target="_blank" title={dataItem.title} rel="noreferrer">{dataItem.title}</a>:
+                                                    <Link to={dataItem.slug}>{dataItem.title}</Link>
+                                                }
+                                            </li>
+                                        )
+                                    })
+                                }
                             </ul>
                         </div>
                         {/* Footer Column */}

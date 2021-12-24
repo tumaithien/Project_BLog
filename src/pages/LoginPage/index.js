@@ -15,20 +15,18 @@ function Login() {
 
     useNotAuthenticated()
     const history = useHistory()
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     // const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         username:{
             value: '',
-            error: '',
-            isTouched: false
+            error: ''
         },
         password:{
             value: '',
-            error: '',
-            isTouched: false
+            error: ''
         }
     });
     
@@ -40,8 +38,7 @@ function Login() {
             ...formData,
             [name]: {
                 value,
-                error,
-                isTouched : true
+                error
             }
         })
         // setIsFormDirty(true)
@@ -72,17 +69,12 @@ function Login() {
         Object.keys(formData)
         .forEach(key => {
             const formValue = formData[key]
-
-            if(formValue.isTouched === false){
-                newFormData[key] = {
-                    value: '',
-                    error: validateFormData({
-                        value: '',
-                        name: key
-                    })
-                }
-            }else{
-                newFormData[key] = formData[key]
+            newFormData[key] = {
+                value: formValue.value,
+                error: validateFormData({
+                    value: formValue.value,
+                    name: key
+                })
             }
         })
         setFormData(newFormData)

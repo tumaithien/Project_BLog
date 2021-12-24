@@ -1,13 +1,17 @@
+import './LoginPage/login.css'
+
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
+
 import Button from '../components/shared/Button'
 import Input from '../components/shared/Input'
 import MainTitle from '../components/shared/MainTitle'
+
 import { validateFormRegister } from '../helpers'
 import { useNotAuthenticated } from '../hook/useNotAuthenticated'
 import { actAsyncRegister } from '../store/auth/actions'
-import './LoginPage/login.css'
+
 
 function Register() {
 
@@ -18,15 +22,15 @@ function Register() {
     const [loading, setLoading] = useState(false)
     const [formData, setFormData] = useState({
         username: {
-            value: 'test05 ',
+            value: '',
             error: ''
         },
         password:{
-            value: '123456',
+            value: '',
             error: ''
         },
         email:{
-            value: 'test03@gmail.com',
+            value: '',
             error: ''
         },
         nickname:{

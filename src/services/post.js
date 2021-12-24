@@ -17,7 +17,7 @@ const postServices ={
         })
     },
 
-    getArticleGeneral({
+    getArticle({
         currentPage = 1,
         perPage =2,
         ...restParam

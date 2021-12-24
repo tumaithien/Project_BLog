@@ -21,16 +21,15 @@ export const authServices ={
             username, nickname, email, password
         })
     },
-    changePassword({password,newpassword, confirmnewpassword}){
+    changePassword({
+        password, newPassword, token
+    }){
         return api.call().put('/wp/v2/users/password',{
-            newpassword, confirmnewpassword,
+            password, newPassword
+        },{
+            headers: {
+                "Authorization" : 'Bearer ' + token
+            }
         })
-    },
-    // getInfoCurrentUser(token){
-    //     return api.call().put('/wp/v2/users/password',{
-    //         headers: {
-    //             "Authorization" : 'Bearer ' + token
-    //         }
-    //     })
-    // }
+    }
 }

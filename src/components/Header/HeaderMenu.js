@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import { actLogOut } from '../../store/auth/actions';
 import HeaderMainMenu from './HeaderMainMenu';
@@ -6,11 +7,13 @@ import HeaderMainMenu from './HeaderMainMenu';
 function HeaderMenu() {
 
     const dispatch = useDispatch()
+    const history = useHistory()
     const currentUser = useSelector(state => state.Authen.currentUser)
 
     function handleLogout(evt) {
         evt.preventDefault()
         dispatch(actLogOut())
+        history.push('/')
     }
 
     return (

@@ -4,22 +4,46 @@ import ArticleItem from '../components/ArticleItem'
 import Button from '../components/shared/Button'
 import { getQueryStr } from '../helpers'
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { actAsyncGetArticles } from '../store/post/actions'
 function Search() {
     const location = useLocation();
     let locationStr = location.search;
     locationStr = getQueryStr('q');
+    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
 
-    const selector = useSelector(state => state.Post.articlesPopular)
+    useEffect(() => {
+        dispatch(actAsyncGetArticles({
+            search: locationStr
+        }))
+    }, [dispatch, locationStr])
+    const {
+        list: selectorArticles,
+        currentPage,
+        totalPages, total
+    } = useSelector(state => state.Post.articlePaging)
 
+    const hasMorePosts = currentPage < totalPages
+
+    function handleClickLoadMore() {
+        if(loading){
+            return
+        }
+        setLoading(true)
+        dispatch(actAsyncGetArticles({
+            currentPage: currentPage + 1,
+            search: locationStr
+        })).then(() => {
+            setLoading(false)
+        })
+    }
     return (
         <div>
             <div className="articles-list section">
                 <div className="tcl-container">
-                    {/* Main Title */}
-                    <MainTitle type="search">10 kết quả tìm kiếm cho từ khóa "{locationStr}"</MainTitle>
-                    {/* End Main Title */}
-                    {/* End Row News List */}
+                    <MainTitle type="search">{total} kết quả tìm kiếm cho từ khóa "{locationStr}"</MainTitle>
                     <div className="tcl-row tcl-jc-center">
                         <div className="tcl-col-12 tcl-col-md-8">
                             <ArticleItem 
@@ -30,7 +54,7 @@ function Search() {
                         </div>
                     </div>
                     {
-                        selector.map(dataItem => {
+                        selectorArticles.map(dataItem => {
                             return(
                                 <div className="tcl-row tcl-jc-center" key={dataItem.id}>
                                     <div className="tcl-col-12 tcl-col-md-8">
@@ -40,10 +64,10 @@ function Search() {
                             )
                         })
                     }
-                    {/* End Row News List */}
-                    {/* Btn Loadmore */}
                     <div className="text-center">
-                        <Button type="primary" size="large">Tải thêm</Button>
+                        {
+                            hasMorePosts && <Button onClick={handleClickLoadMore} type="primary" size="large">Tải thêm</Button>
+                        }
                     </div>
                 </div>
             </div>

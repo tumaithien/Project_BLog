@@ -1,12 +1,15 @@
-import PostDetailSlidebar from "../components/PostDetail/PostDetailSlidebar"
-import PostDetailContent from "../components/PostDetail/PostDetailContent"
-import PostDetailHeader from "../components/PostDetail/PostDetailHeader"
 import { useParams } from "react-router"
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { actAsyncGetPostDetails } from "../store/post/actions";
-import IconLoading from "../components/shared/IconLoading";
+
+import PostDetailSlidebar from "../components/PostDetail/PostDetailSlidebar"
+import PostDetailContent from "../components/PostDetail/PostDetailContent"
+import PostDetailHeader from "../components/PostDetail/PostDetailHeader"
 import PageNotFound from "./PageNotFound";
+
+import IconLoading from "../components/shared/IconLoading";
+
 function PostDetailsPage() {
     const params = useParams();
     const slug = params.slug;

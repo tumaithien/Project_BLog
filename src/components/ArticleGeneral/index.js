@@ -5,7 +5,7 @@ import { useState } from "react";
 import ArticleItem from "../ArticleItem";
 import Button from "../shared/Button"
 
-import { actAsyncGetArticleGeneral } from "../../store/post/actions";
+import { actAsyncGetArticles } from "../../store/post/actions";
 
 function ArticleGeneral() {
 
@@ -24,7 +24,7 @@ function ArticleGeneral() {
       return
     }
     setLoading(true)
-    dispatch(actAsyncGetArticleGeneral({
+    dispatch(actAsyncGetArticles({
       currentPage: currentPage + 1
     })).then(() => {
       setLoading(false)

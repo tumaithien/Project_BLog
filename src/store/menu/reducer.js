@@ -1,7 +1,8 @@
-import { ACT_GET_MAIN_MENU } from "./action";
+import { ACT_GET_FOOTER_MENU, ACT_GET_MAIN_MENU } from "./action";
 
 const initState ={
-    mainMenu: []
+    mainMenu: [],
+    menuFooter: []
 }
 
 function reducer(menuState = initState, action) {
@@ -12,7 +13,11 @@ function reducer(menuState = initState, action) {
                 ...menuState,
                 mainMenu: action.payload.mainMenu
             }
-    
+        case ACT_GET_FOOTER_MENU:
+            return{
+                ...menuState,
+                menuFooter: action.payload.menuFooter
+            }
         default:
             return menuState
     }
