@@ -23,7 +23,7 @@ export default function CommentItem(props) {
                     </div>
                 </div>
                 {
-                    isThisParent && (
+                    isThisParent && false && (
                         <ul className="comments">
                             <CommentItem parentId={123456} />
                             <CommentItem parentId={654321} />
@@ -31,8 +31,8 @@ export default function CommentItem(props) {
                     )
                 }
                 {
-                    isThisParent && false && (
-                        <CommentAction />
+                    isThisParent && (
+                        <CommentAction count={20} />
                     )
                 }
                 {

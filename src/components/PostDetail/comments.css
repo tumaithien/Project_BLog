@@ -102,6 +102,11 @@
       transform: rotate(200deg); }
     .comments__hidden a {
       font-size: 0.9rem; }
+      .comments__hidden button {
+        font-size: 0.9rem;
+        background: unset;
+        border: unset;
+        color: #007bff }
   .comments .comments__form {
     margin-left: 42px;
     margin-top: 1rem; }

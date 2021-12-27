@@ -19,6 +19,7 @@ function ArticleGeneral() {
 
     const hasMorePosts = currentPage < totalPages
 
+
   function handleClickLoadMore() {
     if(loading){
       return
@@ -29,6 +30,7 @@ function ArticleGeneral() {
     })).then(() => {
       setLoading(false)
     })
+      
   }
   return (
     <>
@@ -36,8 +38,7 @@ function ArticleGeneral() {
         <div className="tcl-container">
           {/* Main Title */}
           <div className="main-title spacing d-flex tcl-jc-between tcl-ais-center">
-            <h2>News List</h2>
-            <Button href="/" type="default" as="a">View More</Button>
+            <h2>Danh sách bài viết</h2>
           </div>
           {/* End Main Title */}
           {/* End Row News List */}

@@ -1,4 +1,4 @@
-import { MESSAGE_ERROR } from "../constants"
+import { DEFAULT_AVATAR, MESSAGE_ERROR } from "../constants"
 
 export function getQueryStr(name) {
     return new URLSearchParams(window.location.search).get(name)
@@ -25,6 +25,20 @@ export function mappingPostDetailData(post) {
         contet: post.content.rendered,
         tagsId: post.tags,
         commentCount: post.comment_count
+    }
+}
+
+export function mappingPostComment(commentItem) {
+    return{
+        id: commentItem.id,
+        postId: commentItem.post,
+        content: commentItem.content.rendered,
+        parentId: commentItem.parent,
+        authorId: commentItem.author,
+        authorName: commentItem.author_name,
+        authorAvatar: commentItem.author_data.avatar || DEFAULT_AVATAR,
+        createDate: commentItem.date,
+        replyCount: commentItem.comment_reply_count
     }
 }
 

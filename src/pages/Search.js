@@ -66,7 +66,7 @@ function Search() {
                     }
                     <div className="text-center">
                         {
-                            hasMorePosts && <Button onClick={handleClickLoadMore} type="primary" size="large">Tải thêm</Button>
+                            hasMorePosts && <Button onClick={handleClickLoadMore} Loading={loading} type="primary" size="large">Tải thêm</Button>
                         }
                     </div>
                 </div>

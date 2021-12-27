@@ -98,3 +98,13 @@ body {
 @media screen and (min-width: 1024px) {
   html {
     font-size: 100%; } }
+
+.mt-1{
+  margin-top: 1rem !important;
+}
+.mb-1{
+  margin-bottom: 1rem !important;
+}
+.pl-0{
+  padding-left: 0 !important;
+}

@@ -54,7 +54,6 @@ export function actAsyncLogin(username, password){
     return async dispatch => {
         try {
             const response = await authServices.login({username, password})
-            console.log('response', response)
             const token = response.data.token
             const preponseMe = await dispatch(actAsyncGetInfoUser(token))
             return{

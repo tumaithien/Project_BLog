@@ -11,7 +11,7 @@ function ArticleLatest() {
     return (
         <div className="latest-news section">
             <div className="tcl-container">
-                <MainTitle>Latest News</MainTitle>
+                <MainTitle>Bài viết mới nhất</MainTitle>
                 <div className="latest-news__list spacing">
                     {
                         selectorPost.map(dataItem => {

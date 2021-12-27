@@ -1,6 +1,7 @@
 
 import { mappingPostData, mappingPostDetailData } from '../../helpers'
 import postServices from '../../services/post'
+import { actAsyncComments } from '../comment/actions'
 
 export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
 
@@ -127,7 +128,8 @@ export function actAsyncGetPostDetails(slug) {
             const postId = post.id
             const authorId = post.author
             dispatch(actGetPostDetails(mappingPostDetailData(post)))
-            await dispatch(actGetAsyncRelatedPost({postId, authorId}))
+            dispatch(actAsyncComments({ postId }))
+            dispatch(actGetAsyncRelatedPost({postId, authorId}))
             return { ok: true }
         } catch (error) {
             return {
@@ -152,8 +154,8 @@ export function actGetAsyncRelatedPost({postId, authorId}) {
                 per_page: 3,
                 exclude: postId
             })
+            
             const posts = response.data.map(mappingPostData)
-
             dispatch(actGetRelatedPost(posts))
         } catch (error) {
             

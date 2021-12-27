@@ -1,3 +1,4 @@
+import CommentAction from './CommentAction'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 import './comments.css'
@@ -9,9 +10,10 @@ function PostDetailComments() {
                 <CommentForm />
                 <p>20 Comments</p>
                 <ul className="comments">
+                    <CommentItem parentId={0} />
                     <CommentItem />
                     <CommentItem />
-                    <CommentItem />
+                    <CommentAction parent={true} count={20} />
                 </ul>
             </div>
         </>
