@@ -1,29 +1,35 @@
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { actAsyncGetComments } from '../../store/comment/actions'
+import { useCommentsPaging } from '../../hook/useCommentPagings'
 import CommentAction from './CommentAction'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
 import './comments.css'
 
+const handleMapComments = commnetItems => (
+    <CommentItem
+        key={commnetItems.id}
+        parentId={commnetItems.parentId} 
+        comments={commnetItems} 
+    />
+)
 function PostDetailComments() {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(actAsyncGetComments())
-    })
-
+    
+    const {comments, total} = useCommentsPaging()
 
     return (
         <>
             <div className="post-detail__comments">
                 <CommentForm />
-                <p>20 Comments</p>
-                <ul className="comments">
-                    <CommentItem parentId={0} />
-                    <CommentItem />
-                    <CommentItem />
-                    <CommentAction parent={true} count={20} />
-                </ul>
+                <p>{total} Bình luận</p>
+                {
+                    comments.length > 0 && (
+                        <ul className="comments">
+                            {
+                                comments.map(handleMapComments)
+                            }
+                        </ul>
+                    )
+                }
+                <CommentAction spacingTop parent={true} count={total - comments.length}/>
             </div>
         </>
     )

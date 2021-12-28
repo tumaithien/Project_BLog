@@ -1,7 +1,6 @@
 import '../components/ArticlePopular/popular-news-list.css'
 import MainTitle from '../components/shared/MainTitle'
 import ArticleItem from '../components/ArticleItem'
-import Button from '../components/shared/Button'
 import { getQueryStr } from '../helpers'
 import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
