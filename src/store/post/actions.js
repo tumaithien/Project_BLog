@@ -1,7 +1,7 @@
 
 import { mappingPostData, mappingPostDetailData } from '../../helpers'
 import postServices from '../../services/post'
-import { actAsyncComments } from '../comment/actions'
+import { actAsyncGetComments } from '../comment/actions'
 
 export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
 
@@ -128,7 +128,7 @@ export function actAsyncGetPostDetails(slug) {
             const postId = post.id
             const authorId = post.author
             dispatch(actGetPostDetails(mappingPostDetailData(post)))
-            dispatch(actAsyncComments({ postId }))
+            dispatch(actAsyncGetComments({ postId }))
             dispatch(actGetAsyncRelatedPost({postId, authorId}))
             return { ok: true }
         } catch (error) {

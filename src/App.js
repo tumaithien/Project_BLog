@@ -4,6 +4,10 @@ import HomePage from './pages/HomePage'
 import Login from './pages/LoginPage'
 import Register from './pages/Register'
 import Search from './pages/Search'
+import DemoPage from './pages/DemoPage'
+import ChangePassPage from './pages/ChangePassPage'
+import PageNotFound from './pages/PageNotFound'
+
 import React, { useEffect } from 'react'
 import PostDetailsPage from './pages/PostDetailsPage'
 import {
@@ -12,12 +16,13 @@ import {
   Route
 } from "react-router-dom";
 import { useDispatch } from 'react-redux'
+
+
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
-import DemoPage from './pages/DemoPage'
 import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
-import ChangePassPage from './pages/ChangePassPage'
-import PageNotFound from './pages/PageNotFound'
+
+
 
 function App() {
 

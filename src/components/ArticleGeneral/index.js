@@ -1,37 +1,12 @@
 
-import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react";
 
+import { usePostPagings } from "../../hook/usePostPagings";
 import ArticleItem from "../ArticleItem";
-import Button from "../shared/Button"
-
-import { actAsyncGetArticles } from "../../store/post/actions";
 
 function ArticleGeneral() {
-
-  const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
-  const { 
-    list: selectorPostGeneral,
-     currentPage,
-     totalPages
-    } = useSelector(state => state.Post.articlePaging)
-
-    const hasMorePosts = currentPage < totalPages
-
-
-  function handleClickLoadMore() {
-    if(loading){
-      return
-    }
-    setLoading(true)
-    dispatch(actAsyncGetArticles({
-      currentPage: currentPage + 1
-    })).then(() => {
-      setLoading(false)
-    })
-      
-  }
+  
+  const {post, renderBtnLoadMore} = usePostPagings()
+  
   return (
     <>
       <div className="articles-list section">
@@ -44,7 +19,7 @@ function ArticleGeneral() {
           {/* End Row News List */}
           <div className="tcl-row">
             {
-              selectorPostGeneral.map(dataItem => {
+              post.map(dataItem => {
                 return (
                   <div className="tcl-col-12 tcl-col-md-6" key={dataItem.id}>
                     <ArticleItem isStyleCard isShowAvatar={false} post={dataItem} ></ArticleItem>
@@ -53,20 +28,9 @@ function ArticleGeneral() {
               })
             }
           </div>
-          {/* End Row News List */}
           {/* Btn Loadmore */}
           {
-            hasMorePosts && (
-              <div className="text-center">
-                <Button
-                  type="primary" 
-                  size="large"
-                  Loading={loading}
-                  onClick={handleClickLoadMore}
-                  >Xem Thêm
-                </Button>
-              </div>
-            )
+            renderBtnLoadMore()
           }
         </div>
       </div>

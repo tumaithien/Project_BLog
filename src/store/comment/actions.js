@@ -23,7 +23,7 @@ export function actGetComment({
 }
 
 
-export function actAsyncComments({
+export function actAsyncGetComments({
     perPage = 5,
     currentPage = 1,
     postId,
@@ -43,7 +43,6 @@ export function actAsyncComments({
             })
 
             const comments = response.data.map(mappingPostComment)
-            console.log('response', response)
             const total= Number(response.headers['x-wp-total'])
             const totalPages = Number(response.headers['x-wp-totalpages'])
             dispatch(actGetComment({

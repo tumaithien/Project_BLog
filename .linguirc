@@ -1,6 +1,6 @@
 {
-   "locales": ["en", "cs", "fr"],
-   "sourceLocale": "en",
+   "locales": ["en", "vi", "fr", "zh"],
+   "sourceLocale": "vi",
    "catalogs": [{
       "path": "src/locales/{locale}/messages",
       "include": ["src"]

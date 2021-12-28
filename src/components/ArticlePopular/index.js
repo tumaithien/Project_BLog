@@ -12,7 +12,9 @@ function ArticlePopular() {
             <div className="popular-news section bg-white-blue">
                 <div className="tcl-container">
                     {/* Main Title */}
-                    <MainTitle>Bài viết phổ biến</MainTitle>
+                    <MainTitle>
+                        Bài viết phổ biến
+                    </MainTitle>
                     {/* End Main Title */}
                     <div className="popular-news__list spacing">
                         <div className="popular-news__list--left">

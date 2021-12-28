@@ -7,13 +7,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import store from './store';
+import { i18n } from '@lingui/core'
+import { I18nProvider } from '@lingui/react'
+import { messages } from './locales/en/messages'
 
+i18n.load('en', messages)
+i18n.activate('en')
 
 ReactDOM.render(
   <React.StrictMode>
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <I18nProvider i18n={i18n}>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </I18nProvider>
 </React.StrictMode>,
   document.getElementById('root')
 );

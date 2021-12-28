@@ -4,41 +4,27 @@ import ArticleItem from '../components/ArticleItem'
 import Button from '../components/shared/Button'
 import { getQueryStr } from '../helpers'
 import { useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 import { actAsyncGetArticles } from '../store/post/actions'
+import { usePostPagings } from '../hook/usePostPagings'
 function Search() {
+    const dispatch = useDispatch()
     const location = useLocation();
     let locationStr = location.search;
     locationStr = getQueryStr('q');
-    const dispatch = useDispatch()
-    const [loading, setLoading] = useState(false)
 
+    const {post, total, renderBtnLoadMore} = usePostPagings({
+        extraParams:{
+            search: locationStr
+        }
+    })
     useEffect(() => {
         dispatch(actAsyncGetArticles({
             search: locationStr
         }))
     }, [dispatch, locationStr])
-    const {
-        list: selectorArticles,
-        currentPage,
-        totalPages, total
-    } = useSelector(state => state.Post.articlePaging)
-
-    const hasMorePosts = currentPage < totalPages
-
-    function handleClickLoadMore() {
-        if(loading){
-            return
-        }
-        setLoading(true)
-        dispatch(actAsyncGetArticles({
-            currentPage: currentPage + 1,
-            search: locationStr
-        })).then(() => {
-            setLoading(false)
-        })
-    }
+    
     return (
         <div>
             <div className="articles-list section">
@@ -54,7 +40,7 @@ function Search() {
                         </div>
                     </div>
                     {
-                        selectorArticles.map(dataItem => {
+                        post.map(dataItem => {
                             return(
                                 <div className="tcl-row tcl-jc-center" key={dataItem.id}>
                                     <div className="tcl-col-12 tcl-col-md-8">
@@ -66,7 +52,7 @@ function Search() {
                     }
                     <div className="text-center">
                         {
-                            hasMorePosts && <Button onClick={handleClickLoadMore} Loading={loading} type="primary" size="large">Tải thêm</Button>
+                            renderBtnLoadMore()
                         }
                     </div>
                 </div>
