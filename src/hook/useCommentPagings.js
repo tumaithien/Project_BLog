@@ -4,9 +4,11 @@ import { actAsyncGetComments } from "../store/comment/actions"
 
 const fnSelectorPost = state => state.Post.postDetail && state.Post.postDetail.id
 const fnParentPagingSelector = state => state.Comment.parentPaging
+const fnChildrenPagingSelector = (state, parentId) => state.Comment.hashChildPaging[parentId]
 
 export function useCommentsPaging({
-  extraParams = {}
+  extraParams = {},
+  parentId = 0
 } = {}) {
     const dispatch = useDispatch()
     const postId = useSelector(fnSelectorPost)
@@ -16,7 +18,12 @@ export function useCommentsPaging({
         currentPage,
         totalPages,
         total
-    } = useSelector(fnParentPagingSelector)
+    } = useSelector(state => {
+      if(parentId === 0){
+        return fnParentPagingSelector(state)
+      }
+      return fnChildrenPagingSelector(state, parentId) || { }
+    })
     const hasMoreComments = currentPage < totalPages
 
     function handleClickLoadMore() {
@@ -27,7 +34,7 @@ export function useCommentsPaging({
         dispatch(actAsyncGetComments({
           currentPage: currentPage + 1,
           postId: postId,
-          parentId: 0,
+          parentId,
           ...extraParams
         })).then(() => {
           setLoading(false)
@@ -39,6 +46,7 @@ export function useCommentsPaging({
         total,
         handleClickLoadMore,
         hasMoreComments,
-        totalPages
+        totalPages,
+        loading
     }
 }

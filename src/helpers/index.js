@@ -144,5 +144,5 @@ export function genUserLink(authorId) {
     return `/user/${authorId}`
 }
 export function genPostLink(slug) {
-    return `/user/${slug}`
+    return `/post/${slug}`
 }

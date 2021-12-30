@@ -1,11 +1,14 @@
 import './article-item.css'
 import cls from 'classnames'
+
 import ArticleItemThumb from './ArticleItemThumb';
 import ArticleItemTitle from './ArticleItemTitle';
 import ArticleItemCategories from './ArticleItemCategories';
 import ArticleItemStar from './ArticleItemStar';
 import ArticleItemDesc from './ArticleItemDesc';
 import ArticleItemInfo from './ArticleItemInfo';
+
+import { genPostLink, genUserLink } from '../../helpers';
 
 function ArticleItem(
     {
@@ -30,8 +33,8 @@ function ArticleItem(
         return null
     }
     const { slug, title, author, createDate, thumb, author_id, categoriesId, viewCount, shortDecsHTML } = post
-    const slugLink = '/post/' + slug
-    const slugAuthor = '/user/' + author_id
+    const slugLink = genPostLink(slug)
+    const slugAuthor = genUserLink(author_id)
 
     return (
         <>

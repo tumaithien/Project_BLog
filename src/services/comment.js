@@ -2,7 +2,7 @@ import {api} from './api'
 
 const commentService = {
     getList({
-        perPage = 2,
+        perPage = 5,
         currentPage = 1,
         postId,
         parentId,
@@ -15,6 +15,7 @@ const commentService = {
                 post: postId,
                 parent: parentId,
                 lang: 'vi',
+                order: 'asc',
                 ...restParams
             }
         })
