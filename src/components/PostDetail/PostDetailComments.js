@@ -13,7 +13,7 @@ const handleMapComments = commnetItems => (
 )
 function PostDetailComments() {
     
-    const {comments, total} = useCommentsPaging()
+    const {comments, total, handleClickLoadMore, hasMoreComments} = useCommentsPaging()
 
     return (
         <>
@@ -29,7 +29,15 @@ function PostDetailComments() {
                         </ul>
                     )
                 }
-                <CommentAction spacingTop parent={true} count={total - comments.length}/>
+                {
+                    hasMoreComments && 
+                    <CommentAction 
+                    spacingTop
+                    parent={true} 
+                    count={total - comments.length}
+                    onClick={handleClickLoadMore}
+                 />
+                }
             </div>
         </>
     )

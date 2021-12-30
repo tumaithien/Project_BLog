@@ -24,7 +24,7 @@ export function actGetComment({
 
 
 export function actAsyncGetComments({
-    perPage = 2,
+    perPage = 5,
     currentPage = 1,
     postId,
     parentId = 0,
