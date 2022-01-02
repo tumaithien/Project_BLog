@@ -84,7 +84,8 @@ export function handleHashCategory(categories) {
         hashObj[key]={
             id: categoryItem.id,
             slug: categoryItem.slug,
-            name: categoryItem.name
+            name: categoryItem.name,
+            lang: categoryItem.lang
         }
     })
     
@@ -145,4 +146,19 @@ export function genUserLink(authorId) {
 }
 export function genPostLink(slug) {
     return `/post/${slug}`
+}
+export function genCategoryLink(category) {
+    return `/category/${category}`
+}
+export function genCategoryFooter(category) {
+    return `/category${category}`
+}
+
+export function highlightText(queryStr, tagetStr) {
+    const reg = new RegExp(queryStr, 'gi');
+    const finalStr = tagetStr.replace(reg, function(str)
+    {
+        return '<mark>'+str+'</mark>'
+    })
+    return finalStr
 }

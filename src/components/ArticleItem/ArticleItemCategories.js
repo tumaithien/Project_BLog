@@ -2,6 +2,7 @@ import './article-item.css'
 import { useSelector } from 'react-redux'
 import cls from 'classnames'
 import { Link } from 'react-router-dom'
+import { genCategoryLink } from '../../helpers'
 
 function ArticleItemCategories(
     {
@@ -21,7 +22,7 @@ function ArticleItemCategories(
                         if(!category){
                             return null
                         }
-                        const slugLink = '/category/'+ category.slug
+                        const slugLink = genCategoryLink(category.slug)
                         return (
                             <li key={category.id}>
                                 <Link to={slugLink} className="btn btn-category">{category.name}</Link>
