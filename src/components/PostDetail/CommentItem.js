@@ -1,3 +1,4 @@
+import { useCommentsPaging } from "../../hook/useCommentPagings"
 import CommentAction from "./CommentAction"
 import CommentForm from "./CommentForm"
 import CommentSection from "./CommentSection"
@@ -5,22 +6,28 @@ import CommentSection from "./CommentSection"
 
 export default function CommentItem(props) {
     const isThisParent = props.parentId === 0
+    
+    const { 
+        comments: replyComments, 
+        handleClickLoadMore
+     } = useCommentsPaging({ 
+         parentId: props.comments.id
+        }) //use paging for CommentItem
 
     return (
         <>
             <li className="item">
-                <CommentSection comments={props.comments} />
+                <CommentSection comments={replyComments} />
                 {
                     isThisParent && false && (
                         <ul className="comments">
                             <CommentItem parentId={123456} />
-                            <CommentItem parentId={654321} />
                         </ul>
                     )
                 }
                 {
-                    isThisParent && (
-                        <CommentAction count={5} />
+                    isThisParent && replyComments.replyCount > 0 && (
+                        <CommentAction count={replyComments.replyCount} onClick={handleClickLoadMore} />
                     )
                 }
                 {

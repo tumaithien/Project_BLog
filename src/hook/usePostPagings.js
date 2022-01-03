@@ -27,7 +27,6 @@ export function usePostPagings({
         })).then(() => {
           setLoading(false)
         })
-          
     }
 
     function renderBtnLoadMore() {

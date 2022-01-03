@@ -15,6 +15,7 @@ const commentService = {
                 post: postId,
                 parent: parentId,
                 lang: 'vi',
+                order: 'asc',
                 ...restParams
             }
         })

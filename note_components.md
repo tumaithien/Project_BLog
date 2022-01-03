@@ -24,3 +24,24 @@
   - ArticleItem
 
 - Khi muốn tạo user không cần đăng nhập trước thì dispatch actLogout khi res.ok trả về thông tin để logout user khi được khởi tạo
+
+
+# Tách ra một nhánh mới (Luôn luôn tách ra từ nhánh chính)
+- git checkout -b feat/oksdk-526 
+
+# add và tạo message cho commit
+- git commit -m "message ở đây"
+
+# Dòng lệnh để push một nhánh hoàn toàn mới lên git remote origin hiện tại
+- git push origin -u feat/oksdk-526 
+
+# Để tránh tạo commit mới -> Dùng tag --amend
+- git add .
+- git commit --amend (Nó sẽ hiển thị lên editor để chỉnh sửa message trước đó.)
+  + Nếu không sửa: ESC -> :q -> Enter
+- git push origin feat/oksdk-526 -f
+
+# Cách kết hợp nhiều comment vào chung 1 commit
+
+- git rebase -i HEAD~n
+

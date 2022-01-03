@@ -1,10 +1,11 @@
-import { ACT_GET_COMMENT_PARENT_POST } from "./actions";
+import { ACT_GET_CHILDREN_COMMENTS_PAGING, ACT_GET_COMMENT_PARENT_POST } from "./actions";
 
 const initState = {
     parentPaging:{
         list: [],
         currentPage: 1
-    }
+    },
+    hasChildrenPaging:{}
 }
 
 function reducer(commentState = initState, action) {
@@ -23,7 +24,22 @@ function reducer(commentState = initState, action) {
                 }
                 
             }
-    
+        case ACT_GET_CHILDREN_COMMENTS_PAGING:
+            return{
+                ...commentState,
+                hasChildrenPaging:{
+                    ...commentState.hasChildrenPaging,
+                    ...action.payload.comments.reduce((output, commentItem) => {
+                        output[commentItem.id] = {
+                            list: [],
+                            currentPage: 0,
+                            total: 0,
+                            totalPages: 1
+                        }
+                        return output
+                    }, {})
+                }
+            }
         default:
             return commentState
     }

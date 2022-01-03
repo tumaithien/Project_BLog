@@ -8,12 +8,12 @@ const handleMapComments = commnetItems => (
     <CommentItem
         key={commnetItems.id}
         parentId={commnetItems.parentId} 
-        comments={commnetItems} 
+        comments={commnetItems}
     />
 )
 function PostDetailComments() {
     
-    const {comments, total, handleClickLoadMore, hasMoreComments} = useCommentsPaging()
+    const {comments, total, handleClickLoadMore, hasMoreComments, loading} = useCommentsPaging()
 
     return (
         <>
@@ -36,6 +36,7 @@ function PostDetailComments() {
                     parent={true} 
                     count={total - comments.length}
                     onClick={handleClickLoadMore}
+                    Loading={loading}
                  />
                 }
             </div>
