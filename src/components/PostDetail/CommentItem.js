@@ -6,28 +6,39 @@ import CommentSection from "./CommentSection"
 
 export default function CommentItem(props) {
     const isThisParent = props.parentId === 0
-    
-    const { 
+    const { handleClickLoadMore,
         comments: replyComments, 
-        handleClickLoadMore
-     } = useCommentsPaging({ 
-         parentId: props.comments.id
-        }) //use paging for CommentItem
+        loading } = useCommentsPaging({ parentId: props.comments.id }) // Use for childrenPaging
+
 
     return (
         <>
             <li className="item">
                 <CommentSection comments={replyComments} />
                 {
-                    isThisParent && false && (
+                    isThisParent && replyComments?.length > 0 && (
                         <ul className="comments">
-                            <CommentItem parentId={123456} />
+                            {
+                                replyComments.map(replyCmtItem => {
+                                    return (
+                                        <CommentItem 
+                                            key={replyCmtItem.id} 
+                                            parentId={props.comments.id} 
+                                            comments={replyCmtItem} 
+                                        />
+                                    )
+                                })
+                            }
                         </ul>
                     )
                 }
                 {
-                    isThisParent && replyComments.replyCount > 0 && (
-                        <CommentAction count={replyComments.replyCount} onClick={handleClickLoadMore} />
+                    isThisParent && props.comments.replyCount > 0 &&  (
+                        <CommentAction 
+                            count={props.comments.replyCount - replyComments.length} 
+                            onClick={handleClickLoadMore}
+                            Loading={loading} 
+                        />
                     )
                 }
                 {

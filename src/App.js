@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
+import SearchCategory from './pages/SearchCategory'
 
 
 
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/post/:slug">
             <PostDetailsPage />
+          </Route>
+          <Route path="/category/:slug">
+            <SearchCategory />
           </Route>
           <Route path="/demo">
             <DemoPage />

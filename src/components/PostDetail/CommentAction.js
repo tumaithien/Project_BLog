@@ -29,18 +29,15 @@ export default function CommentAction({
     if (count === 0 || count === undefined) return null
 
     return (
-        (
-            <div className={classes}>
-                <a href='#' onClick={handleClick} >
-                    {
-                        !parent && (<i className="icons ion-ios-undo" />)
-                    }
-                    {label}
-                    {
-                        Loading && (<IconLoading width={15} />)
-                    }
-                </a>
-            </div>
-        )
+        <div className={classes}>
+           <button onClick={handleClick}>
+            {
+                !parent && (<i className="icons ion-ios-undo" />)
+            } {label}
+            {
+                Loading && ( <IconLoading width={15} /> )
+            }
+           </button>
+        </div>
     )
 }

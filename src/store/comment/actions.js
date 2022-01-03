@@ -3,8 +3,8 @@ import commentService from "../../services/comment"
 
 export const ACT_GET_CHILDREN_COMMENTS_PAGING = 'ACT_GET_CHILDREN_COMMENTS_PAGING'
 export const ACT_GET_COMMENT_PARENT_POST = 'ACT_GET_COMMENT_PARENT_POST'
-export const ACT_GET_COMMENT_REPLY = 'ACT_GET_COMMENT_REPLY'
-
+export const ACT_GET_COMMENT_REPLY_POST = 'ACT_GET_COMMENT_REPLY_POST'
+export const ACT_INIT_COMMENT_CHILDREN_PAGING = 'ACT_INIT_COMMENT_CHILDREN_PAGING'
 
 export function actGetComment({
     currentPage,
@@ -14,23 +14,23 @@ export function actGetComment({
     parentId
 }) {
     return{
-        type: parentId === 0 ? ACT_GET_COMMENT_PARENT_POST : ACT_GET_COMMENT_REPLY,
+        type: parentId === 0 ? ACT_GET_COMMENT_PARENT_POST : ACT_GET_COMMENT_REPLY_POST,
         payload: {
             currentPage,
             comments,
             total,
-            totalPages
+            totalPages,
+            parentId
         }
     }
 }
 
-export function actGetChildrenPaging(comments) {
+export function actInitChildrenPaging(comments) {
     return{
-        type: ACT_GET_CHILDREN_COMMENTS_PAGING,
+        type: ACT_INIT_COMMENT_CHILDREN_PAGING,
         payload: { comments }
     }
 }
-
 
 export function actAsyncGetComments({
     perPage = 5,
@@ -54,9 +54,8 @@ export function actAsyncGetComments({
             const comments = response.data.map(mappingPostComment)
             const total= Number(response.headers['x-wp-total'])
             const totalPages = Number(response.headers['x-wp-totalpages'])
-            
             if(parentId === 0){
-                dispatch(actGetChildrenPaging(comments))
+                dispatch(actInitChildrenPaging(comments))
             }
             dispatch(actGetComment({
                 currentPage,
