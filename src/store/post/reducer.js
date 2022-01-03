@@ -1,4 +1,4 @@
-import { ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
+import { ACT_CLEAR_POST_DETAIL, ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
 
 
 
@@ -53,6 +53,11 @@ function reducer(postState = initState, action) {
       return {
         ...postState,
         relatedPostByAuthor: action.payload.posts
+      }
+    case ACT_CLEAR_POST_DETAIL:
+      return {
+        ...postState,
+        postDetail: null
       }
     default:
       return postState

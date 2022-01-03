@@ -3,9 +3,14 @@ import PostDetailComments from './PostDetailComments'
 import TagsRelated from '../ArticleItem/TagsRelated'
 import { useSelector } from 'react-redux'
 import PostRichText from './PostRichText'
-function PostDetailContent() {
+function PostDetailContent({
+    
+}) {
     const postContentSelector = useSelector(state => state.Post.postDetail)
-    const {contet, thumb, title} = postContentSelector
+    const {contet, thumb, title, tagsId} = postContentSelector
+
+    
+
     return (
         <>
             <div className="post-detail__content">
@@ -14,7 +19,7 @@ function PostDetailContent() {
                 </div>
                 <div className="content-padding">
                     <PostRichText content={contet} />
-                    <TagsRelated />
+                    <TagsRelated tagsId={tagsId} />
                     <PostDetailComments />
                 </div>
             </div>

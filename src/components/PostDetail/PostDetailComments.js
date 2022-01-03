@@ -14,11 +14,10 @@ const handleMapComments = commnetItems => (
 function PostDetailComments() {
     
     const {comments, total, handleClickLoadMore, hasMoreComments, loading} = useCommentsPaging()
-
     return (
         <>
             <div className="post-detail__comments">
-                <CommentForm />
+                <CommentForm parentId={0} />
                 <p>{total} Bình luận</p>
                 {
                     comments.length > 0 && (

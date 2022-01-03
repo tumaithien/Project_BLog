@@ -108,13 +108,3 @@ export function actChangePassword({
         }
     }
 }
-
-export function actAsyncChangePassword({password, newPassword, token}) {
-    return async dispatch => {
-        try {
-            const response = authServices.changePassword({password, newPassword, token})
-        } catch (error) {
-            
-        }
-    }
-}

@@ -7,6 +7,7 @@ import Search from './pages/Search'
 import DemoPage from './pages/DemoPage'
 import ChangePassPage from './pages/ChangePassPage'
 import PageNotFound from './pages/PageNotFound'
+import SearchCategory from './pages/SearchCategory'
 
 import React, { useEffect } from 'react'
 import PostDetailsPage from './pages/PostDetailsPage'
@@ -21,7 +22,7 @@ import { useDispatch } from 'react-redux'
 import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
-import SearchCategory from './pages/SearchCategory'
+import { actAsyncGetTags } from './store/tag/action'
 
 
 
@@ -34,6 +35,7 @@ function App() {
     dispatch(actAsyncGetInfoUser())
     dispatch(actAsyncGetMenu())
     dispatch(actAsyncGetMenuFooter())
+    dispatch(actAsyncGetTags())
   }, [dispatch])
   return (
     <Router>
