@@ -92,6 +92,25 @@ export function handleHashCategory(categories) {
 
     return hashObj
 }
+
+export function handleHashTags(tags) {
+    const hashObj = {}
+
+    tags.forEach(tagItem => {
+        const key = tagItem.id
+        hashObj[key] = tagItem
+
+        hashObj[key] = {
+            id: tagItem.id,
+            slug: tagItem.slug,
+            name: tagItem.name,
+            lang: tagItem.lang
+        }
+    })
+
+    return hashObj
+}
+
 export function validateFormData({ name, value }) {
     let error = ''
     

@@ -58,15 +58,6 @@ function Search() {
             <div className="articles-list section">
                 <div className="tcl-container">
                     <MainTitle type="search">{total} kết quả tìm kiếm cho từ khóa "{locationStr}"</MainTitle>
-                    <div className="tcl-row tcl-jc-center">
-                        <div className="tcl-col-12 tcl-col-md-8">
-                            <ArticleItem
-                                isStyleCard
-                                isShowCategories
-                            >
-                            </ArticleItem>
-                        </div>
-                    </div>
                     {
                         post.map(dataItem => {
                             return (

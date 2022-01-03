@@ -10,11 +10,10 @@ export default function CommentItem(props) {
         comments: replyComments, 
         loading } = useCommentsPaging({ parentId: props.comments.id }) // Use for childrenPaging
 
-
     return (
         <>
             <li className="item">
-                <CommentSection comments={replyComments} />
+                <CommentSection comments={props.comments} />
                 {
                     isThisParent && replyComments?.length > 0 && (
                         <ul className="comments">

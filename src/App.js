@@ -22,6 +22,7 @@ import { actAsyncAllCategory } from './store/category/action'
 import {actAsyncGetInfoUser} from './store/auth/actions'
 import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
 import SearchCategory from './pages/SearchCategory'
+import { actAsyncGetTags } from './store/tag/action'
 
 
 
@@ -34,6 +35,7 @@ function App() {
     dispatch(actAsyncGetInfoUser())
     dispatch(actAsyncGetMenu())
     dispatch(actAsyncGetMenuFooter())
+    dispatch(actAsyncGetTags())
   }, [dispatch])
   return (
     <Router>
