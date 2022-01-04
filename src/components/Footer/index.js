@@ -11,7 +11,6 @@ function Footer() {
             <div className="tcl-container">
                 <div className="footer">
                     <div className="tcl-row">
-                        {/* Footer Column */}
                         <div className="tcl-col-12 tcl-col-sm-6 tcl-col-md-4 tcl-col-lg-3">
                             <div className="footer-logo">
                                 <img src="/assets/images/logo.png" alt="NuxtBlog Logo" />
