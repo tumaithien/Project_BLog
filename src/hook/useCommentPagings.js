@@ -10,10 +10,10 @@ export function useCommentsPaging({
   extraParams = {},
   parentId = 0
 } = {}) {
-    const dispatch = useDispatch()
-    const postId = useSelector(fnSelectorPost)
-    const [loading, setLoading] = useState(false)
-    const { 
+  const dispatch = useDispatch()
+  const postId = useSelector(fnSelectorPost)
+  const [loading, setLoading] = useState(false)
+  const {
     list: comments,
         currentPage,
         totalPages,

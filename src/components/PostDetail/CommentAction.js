@@ -12,20 +12,21 @@ export default function CommentAction({
 
     function handleClick(evt) {
         evt.preventDefault()
-        if(onClick){
+        if (onClick) {
             onClick(evt)
         }
     }
 
-    const classes = cls('comments__hidden',{
+
+    const classes = cls('comments__hidden', {
         'mt-1': spacingTop,
         'mb-1': spacingBottom,
         'pl-0': parent
     })
 
     const label = parent ? `Xem thêm ${count} bình luận` : `${count} phản hồi`
-    
-    if (count === 0) return null
+
+    if (count === 0 || count === undefined) return null
 
     return (
         <div className={classes}>

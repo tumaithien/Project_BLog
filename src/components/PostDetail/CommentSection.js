@@ -6,9 +6,7 @@ import { formatRelativeDate } from "../../helpers/day"
 function CommentSection({ comments }) {
 
     const {authorAvatar, authorName, content, createDate, authorId} = comments
-
     const authorLink = genUserLink(authorId)
-
     const {dateFormated, dateRelative} = formatRelativeDate(createDate, true)
 
     return (

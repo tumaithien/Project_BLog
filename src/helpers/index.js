@@ -57,7 +57,7 @@ export function mappingCurrentUser(user) {
         name: user.nickname,
         email: user.email,
         slug: user.slug,
-        avatar: user.avatar_urls[96],
+        avatar: user.simple_local_avatar?.full || DEFAULT_AVATAR
     }
 }
 
@@ -92,6 +92,25 @@ export function handleHashCategory(categories) {
 
     return hashObj
 }
+
+export function handleHashTags(tags) {
+    const hashObj = {}
+
+    tags.forEach(tagItem => {
+        const key = tagItem.id
+        hashObj[key] = tagItem
+
+        hashObj[key] = {
+            id: tagItem.id,
+            slug: tagItem.slug,
+            name: tagItem.name,
+            lang: tagItem.lang
+        }
+    })
+
+    return hashObj
+}
+
 export function validateFormData({ name, value }) {
     let error = ''
     
@@ -152,6 +171,9 @@ export function genCategoryLink(category) {
 }
 export function genCategoryFooter(category) {
     return `/category${category}`
+}
+export function genTagsLink(tags) {
+    return `/tags/${tags}`
 }
 
 export function highlightText(queryStr, tagetStr) {

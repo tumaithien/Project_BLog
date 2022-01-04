@@ -4,14 +4,11 @@ import postServices from '../../services/post'
 import { actAsyncGetComments } from '../comment/actions'
 
 export const ACT_GET_ARTICLE_LASTEST = 'ACT_GET_ARTICLE_LASTEST'
-
 export const ACT_GET_ARTICLES = 'ACT_GET_ARTICLES'
-
 export const ACT_GET_ARTICLE_POPULAR = 'ACT_GET_ARTICLE_POPULAR'
-
 export const ACT_GET_POST_DETAIL = 'ACT_GET_POST_DETAIL'
-
 export const ACT_GET_RELATED_POST = 'ACT_GET_RELATED_POST'
+export const ACT_CLEAR_POST_DETAIL = 'ACT_CLEAR_POST_DETAIL'
 
 
 export function actGetArticleLastest(posts){
@@ -116,6 +113,11 @@ export function actGetPostDetails(post) {
     }
 }
 
+export function actClearPostDetails() {
+    return{
+        type: ACT_CLEAR_POST_DETAIL
+    }
+}
 
 export function actAsyncGetPostDetails(slug) {
     return async (dispatch) => {
