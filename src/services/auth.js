@@ -8,28 +8,18 @@ export const authServices ={
         })
     },
     getInfoUser(token){
-        return api.call().get('/wp/v2/users/me',{
-            headers: {
-                "Authorization" : 'Bearer ' + token
-            }
-        })
+        // return api.call().get('/wp/v2/users/me',{
+        //     headers: {
+        //         "Authorization" : 'Bearer ' + token
+        //     }
+        // })
+        return api.callWithToken().get('/wp/v2/users/me')
     },
     register({
         username, nickname, email, password
     }){
         return api.call().post('/wp/v2/users/register',{
             username, nickname, email, password
-        })
-    },
-    changePassword({
-        password, newPassword, token
-    }){
-        return api.call().put('/wp/v2/users/password',{
-            password, newPassword
-        },{
-            headers: {
-                "Authorization" : 'Bearer ' + token
-            }
         })
     }
 }

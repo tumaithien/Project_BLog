@@ -7,14 +7,12 @@ import { useState } from 'react'
 import { validateFormData } from '../../helpers'
 import { useDispatch } from 'react-redux'
 import { actAsyncLogin } from '../../store/auth/actions'
-import {useHistory} from 'react-router-dom'
 import { useNotAuthenticated } from '../../hook/useNotAuthenticated'
 
 
 function Login() {
 
     useNotAuthenticated()
-    const history = useHistory()
     const dispatch = useDispatch()
     // const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
@@ -107,7 +105,7 @@ function Login() {
         dispatch(actAsyncLogin(username.value, password.value))
         .then(res => {
             if(res.ok){
-                history.push('/')
+                // history.push('/')
             }else{
                 console.log('Error', res.error)
                 setFormError(res.error)

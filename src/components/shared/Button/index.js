@@ -37,12 +37,6 @@ import IconLoading from '../IconLoading'
         </>
     );
 
-    // function _onClick(evt){
-    //     if(!Loading){
-    //        onClick && onClick(evt);
-    //     }
-    // }
-
     const injectedProps = {
         className: classes,
         type: htmlType,

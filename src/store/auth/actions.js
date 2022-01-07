@@ -1,5 +1,5 @@
 //Action types
-import {ACT_CHANGE_PASSWORD, ACT_LOGIN_SUCCESS, ACT_LOGOUT} from "../auth/actionTypes"
+import { ACT_LOGIN_SUCCESS, ACT_LOGOUT, ACT_SET_TOKEN} from "../auth/actionTypes"
 
 import { ACCESS_TOKEN, MESSAGE_ERROR } from "../../constants"
 
@@ -25,16 +25,22 @@ export function actLogOut() {
     }
 }
 
+export function actSetToken(token) {
+    return {
+        type: ACT_SET_TOKEN,
+        payload:{ token }
+    }
+}
+
 
 //Action Async
 export function actAsyncGetInfoUser(token){
-
     return async dispatch => {
         if(token === undefined){
             token = localStorage.getItem(ACCESS_TOKEN)
         }
         try {
-            const response = await authServices.getInfoUser(token)
+            const response = await authServices.getInfoUser()
             const user = mappingCurrentUser(response.data)
             dispatch(actLoginSuccess({user, token}))
             return{
@@ -55,6 +61,7 @@ export function actAsyncLogin(username, password){
         try {
             const response = await authServices.login({username, password})
             const token = response.data.token
+            dispatch(actSetToken(token))
             const preponseMe = await dispatch(actAsyncGetInfoUser(token))
             return{
                 ok: preponseMe.ok,
@@ -93,18 +100,6 @@ export function actAsyncRegister({nickname, username, email, password}) {
                 ok: false,
                 error: errorMessage
             }
-        }
-    }
-}
-
-export function actChangePassword({
-    newPassword, token
-}) {
-    return {
-        type: ACT_CHANGE_PASSWORD,
-        payload: {
-            newPassword,
-            token
         }
     }
 }

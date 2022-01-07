@@ -19,6 +19,19 @@ const commentService = {
                 ...restParams
             }
         })
+    },
+    createOne({
+        authorId,
+        content,
+        postId,
+        parentId
+    }){
+        return api.callWithToken().post('/wp/v2/comments',{
+            author: authorId,
+            content,
+            post: postId,
+            parent: parentId
+        })
     }
 }
 
