@@ -1,4 +1,4 @@
-import IconLoading from "../components/shared/IconLoading";
+
 import Input from "../components/shared/Input";
 
 
@@ -19,7 +19,7 @@ function DemoInput(){
                     }}
                      />
                     <Input Label="Search" className="custom-input" type="search" placeholder="Nhập giá trị cần tìm kiếm" />
-                    <Input Label="Search" icon={<IconLoading width="1em" />} className="custom-input" type="search" placeholder="Nhập giá trị cần tìm kiếm" />
+                    <Input Label="Search" className="custom-input" type="search" placeholder="Nhập giá trị cần tìm kiếm" />
                 </div>
             </div>
         </>
