@@ -76,7 +76,6 @@ function SearchCategory() {
             <PageNotFound />
         )
     }
-    console.log('post', post)
 
     return (
         <>
