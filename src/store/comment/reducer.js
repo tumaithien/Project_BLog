@@ -1,4 +1,4 @@
-import { ACT_GET_COMMENT_REPLY_POST, ACT_GET_COMMENT_PARENT_POST, ACT_INIT_COMMENT_CHILDREN_PAGING } from "./actions";
+import { ACT_GET_COMMENT_REPLY_POST, ACT_GET_COMMENT_PARENT_POST, ACT_INIT_COMMENT_CHILDREN_PAGING, ACT_NEW_COMMENT_PARENT } from "./actions";
 
 const initState = {
     parentPaging:{
@@ -10,6 +10,17 @@ const initState = {
 
 function reducer(commentState = initState, action) {
     switch (action.type) {
+        case ACT_NEW_COMMENT_PARENT:
+            return{
+                ...commentState,
+                parentPaging:{
+                    ...commentState.parentPaging,
+                    list:[
+                        action.payload.comment,
+                        ...commentState.parentPaging.list,
+                    ]
+                }
+            }
         case ACT_GET_COMMENT_PARENT_POST:
             return{
                 ...commentState,

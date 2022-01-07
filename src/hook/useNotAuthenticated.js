@@ -8,7 +8,6 @@ export function useNotAuthenticated(){
     const history = useHistory()
     const isAuthenticated = useSelector(state => Boolean(state.Authen.token))
     const postHistory = useSelector(state => state.Post.postDetail)
-    console.log('postHistory', postHistory)
 
     useEffect(() => {
         if(isAuthenticated){

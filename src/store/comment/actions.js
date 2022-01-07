@@ -5,6 +5,7 @@ export const ACT_GET_CHILDREN_COMMENTS_PAGING = 'ACT_GET_CHILDREN_COMMENTS_PAGIN
 export const ACT_GET_COMMENT_PARENT_POST = 'ACT_GET_COMMENT_PARENT_POST'
 export const ACT_GET_COMMENT_REPLY_POST = 'ACT_GET_COMMENT_REPLY_POST'
 export const ACT_INIT_COMMENT_CHILDREN_PAGING = 'ACT_INIT_COMMENT_CHILDREN_PAGING'
+export const ACT_NEW_COMMENT_PARENT = 'ACT_NEW_COMMENT_PARENT'
 
 export function actGetComment({
     currentPage,
@@ -22,6 +23,13 @@ export function actGetComment({
             totalPages,
             parentId
         }
+    }
+}
+
+export function actPostNewComment(comment) {
+    return{
+        type: ACT_NEW_COMMENT_PARENT,
+        payload:{ comment }
     }
 }
 
@@ -65,6 +73,32 @@ export function actAsyncGetComments({
                 parentId
             }))
 
+        } catch (error) {
+            
+        }
+    }
+}
+
+export function actAsyncPostNewComments({
+        authorId,
+        content,
+        postId,
+        parentId = 0
+}) {
+    return async dispatch => {
+        try {
+            if(!authorId || !content || !postId){
+                throw new Error('Invalid Data')
+            }
+            const response = await commentService.createOne({
+                authorId,
+                content,
+                postId,
+                parentId
+            })
+            
+            const comment = mappingPostComment(response.data)
+            dispatch(actPostNewComment(comment))
         } catch (error) {
             
         }

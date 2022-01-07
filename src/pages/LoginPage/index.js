@@ -107,7 +107,7 @@ function Login() {
         dispatch(actAsyncLogin(username.value, password.value))
         .then(res => {
             if(res.ok){
-                history.push('/')
+                // history.push('/')
             }else{
                 console.log('Error', res.error)
                 setFormError(res.error)
