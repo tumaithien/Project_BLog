@@ -2,14 +2,13 @@ import './input.css'
 import cls from 'classnames'
 import { useState } from 'react'
 import IconSearch from '../IconSearch'
-import IconLoading from '../IconLoading'
 
 function Input({
     Label,
     type= 'text',
     className,
     error,
-    icon,
+    icon = <IconSearch />,
     ...restProps
 }) {
     const [localType, setLocalType] = useState(type)
