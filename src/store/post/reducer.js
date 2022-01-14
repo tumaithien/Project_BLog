@@ -1,4 +1,4 @@
-import { ACT_CLEAR_POST_DETAIL, ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
+import { ACT_INCREASE_COMMENT_COUNT, ACT_CLEAR_POST_DETAIL, ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
 
 
 
@@ -17,6 +17,14 @@ const initState = {
 
 function reducer(postState = initState, action) {
   switch (action.type) {
+    case ACT_INCREASE_COMMENT_COUNT:
+      return {
+        ...postState,
+        postDetail:{
+          ...postState.postDetail,
+          commentCount: postState.postDetail.commentCount ++
+        }
+      }
     case ACT_GET_ARTICLE_LASTEST:
       return {
         ...postState,
@@ -58,6 +66,11 @@ function reducer(postState = initState, action) {
       return {
         ...postState,
         postDetail: null
+      }
+    case ACT_INCREASE_COMMENT_COUNT:
+      return{
+        ...postState,
+
       }
     default:
       return postState

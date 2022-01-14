@@ -26,7 +26,6 @@ function Header() {
 
     if(scrolled){
         yScroll.push('scrolled')
-        console.log(yScroll)
     }
 
     return (

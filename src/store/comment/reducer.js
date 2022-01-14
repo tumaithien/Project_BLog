@@ -3,7 +3,10 @@ import { ACT_GET_COMMENT_REPLY_POST, ACT_GET_COMMENT_PARENT_POST, ACT_INIT_COMME
 const initState = {
     parentPaging:{
         list: [],
-        currentPage: 1
+        currentPage: 1,
+        total: 0,
+        totalPages: 0,
+        exclude: []
     },
     hashChildPaging:{ }
 }
@@ -18,6 +21,10 @@ function reducer(commentState = initState, action) {
                     list:[
                         action.payload.comment,
                         ...commentState.parentPaging.list,
+                    ],
+                    exclude:[
+                        ...commentState.parentPaging.exclude,
+                        action.payload.comment.id
                     ]
                 }
             }
@@ -48,6 +55,7 @@ function reducer(commentState = initState, action) {
                              currentPage: 0,
                              total: 0,
                              totalPage: 1,
+                             exclude: []
                          }
                          return output
                     }, {})

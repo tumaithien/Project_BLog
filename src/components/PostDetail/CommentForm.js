@@ -15,6 +15,7 @@ export default function CommentForm({ parentId }) {
     const postId = useSelector(state => state.Post.postDetail?.id)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(false)
+    
     if(isThisParent && !currentUser){
         return <p className="text-red">Bạn phải <Link to="/login">đăng nhập</Link> để bình luận bài viết</p>
     }
@@ -33,8 +34,12 @@ export default function CommentForm({ parentId }) {
             content,
             postId
         })).then(res => {
+            if(res.ok){
+                setContent('')
+            }else{
+
+            }
             setLoading(false)
-            console.log('asdasdasdas')
         })
         
     }

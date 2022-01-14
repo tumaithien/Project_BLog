@@ -1,5 +1,6 @@
 import { mappingPostComment } from "../../helpers"
 import commentService from "../../services/comment"
+import { actGetIncreaseCommentCount } from "../post/actions"
 
 export const ACT_GET_CHILDREN_COMMENTS_PAGING = 'ACT_GET_CHILDREN_COMMENTS_PAGING'
 export const ACT_GET_COMMENT_PARENT_POST = 'ACT_GET_COMMENT_PARENT_POST'
@@ -45,6 +46,7 @@ export function actAsyncGetComments({
     currentPage = 1,
     postId,
     parentId = 0,
+    exclude = []
 }) {
     return async dispatch => {
         try {
@@ -56,7 +58,8 @@ export function actAsyncGetComments({
                 perPage,
                 currentPage,
                 postId,
-                parentId
+                parentId,
+                exclude
             })
 
             const comments = response.data.map(mappingPostComment)
@@ -83,7 +86,8 @@ export function actAsyncPostNewComments({
         authorId,
         content,
         postId,
-        parentId = 0
+        parentId = 0,
+        
 }) {
     return async dispatch => {
         try {
@@ -99,6 +103,9 @@ export function actAsyncPostNewComments({
             
             const comment = mappingPostComment(response.data)
             dispatch(actPostNewComment(comment))
+            dispatch(actGetIncreaseCommentCount())
+
+            return{ok: true }
         } catch (error) {
             
         }
