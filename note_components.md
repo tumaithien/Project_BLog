@@ -39,18 +39,16 @@
 - git add .
 - git commit --amend (Nó sẽ hiển thị lên editor để chỉnh sửa message trước đó.)
   + Nếu không sửa: ESC -> :q -> Enter
-<<<<<<< HEAD
-=======
   + Nếu sửa: ESC -> :wq -> Enter
->>>>>>> fd73e2923ed8b134686a847c895f6a7c5cd410d4
 - git push origin feat/oksdk-526 -f
 
 # Cách kết hợp nhiều comment vào chung 1 commit
 
 - git rebase -i HEAD~n
 
-<<<<<<< HEAD
-=======
-# Tinh Nang 3
+//Hook Component:
 
->>>>>>> fd73e2923ed8b134686a847c895f6a7c5cd410d4
+Menu Scroll: https://dev.to/dalalrohit/sticky-navbar-from-scratch-using-react-37d5
+
+
+

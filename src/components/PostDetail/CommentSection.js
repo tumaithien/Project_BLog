@@ -3,7 +3,7 @@ import { genUserLink } from "../../helpers"
 import { formatRelativeDate } from "../../helpers/day"
 
 
-function CommentSection({ comments }) {
+function CommentSection({ comments, onReplyClick, parentId }) {
 
     const {authorAvatar, authorName, content, createDate, authorId} = comments
     const authorLink = genUserLink(authorId)
@@ -19,11 +19,11 @@ function CommentSection({ comments }) {
             <div className="comments__section--content">
                 <Link to={authorLink} className="comments__section--user">{authorName}</Link>
                 <p className="comments__section--time" title={dateRelative}>{dateFormated}</p>
-                <p className="comments__section--text" dangerouslySetInnerHTML={{
+                <div className="comments__section--text" dangerouslySetInnerHTML={{
                     __html: content
                 }}>
-                </p>
-
+                </div>
+                <i className="ion-reply comments__section--reply" onClick={onReplyClick}></i>
             </div>
         </div>
     )

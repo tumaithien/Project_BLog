@@ -9,6 +9,7 @@ export const ACT_GET_ARTICLE_POPULAR = 'ACT_GET_ARTICLE_POPULAR'
 export const ACT_GET_POST_DETAIL = 'ACT_GET_POST_DETAIL'
 export const ACT_GET_RELATED_POST = 'ACT_GET_RELATED_POST'
 export const ACT_CLEAR_POST_DETAIL = 'ACT_CLEAR_POST_DETAIL'
+export const ACT_INCREASE_COMMENT_COUNT = 'ACT_INCREASE_COMMENT_COUNT'
 
 
 export function actGetArticleLastest(posts){
@@ -162,5 +163,11 @@ export function actGetAsyncRelatedPost({postId, authorId}) {
         } catch (error) {
             
         }
+    }
+}
+
+export function actGetIncreaseCommentCount() {
+    return{
+        type: ACT_INCREASE_COMMENT_COUNT
     }
 }

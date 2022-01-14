@@ -1,11 +1,13 @@
 import { mappingPostComment } from "../../helpers"
 import commentService from "../../services/comment"
+import { actGetIncreaseCommentCount } from "../post/actions"
 
 export const ACT_GET_CHILDREN_COMMENTS_PAGING = 'ACT_GET_CHILDREN_COMMENTS_PAGING'
 export const ACT_GET_COMMENT_PARENT_POST = 'ACT_GET_COMMENT_PARENT_POST'
 export const ACT_GET_COMMENT_REPLY_POST = 'ACT_GET_COMMENT_REPLY_POST'
 export const ACT_INIT_COMMENT_CHILDREN_PAGING = 'ACT_INIT_COMMENT_CHILDREN_PAGING'
 export const ACT_NEW_COMMENT_PARENT = 'ACT_NEW_COMMENT_PARENT'
+export const ACT_NEW_REPLY_COMMENTS = 'ACT_NEW_REPLY_COMMENTS'
 
 export function actGetComment({
     currentPage,
@@ -27,8 +29,9 @@ export function actGetComment({
 }
 
 export function actPostNewComment(comment) {
+    
     return{
-        type: ACT_NEW_COMMENT_PARENT,
+        type: comment.parentId === 0 ? ACT_NEW_COMMENT_PARENT : ACT_NEW_REPLY_COMMENTS,
         payload:{ comment }
     }
 }
@@ -45,6 +48,7 @@ export function actAsyncGetComments({
     currentPage = 1,
     postId,
     parentId = 0,
+    exclude = []
 }) {
     return async dispatch => {
         try {
@@ -56,7 +60,8 @@ export function actAsyncGetComments({
                 perPage,
                 currentPage,
                 postId,
-                parentId
+                parentId,
+                exclude
             })
 
             const comments = response.data.map(mappingPostComment)
@@ -99,8 +104,11 @@ export function actAsyncPostNewComments({
             
             const comment = mappingPostComment(response.data)
             dispatch(actPostNewComment(comment))
+            dispatch(actGetIncreaseCommentCount())
+
+            return{ok: true }
         } catch (error) {
-            
+            return {ok: false}
         }
     }
 }

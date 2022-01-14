@@ -127,6 +127,7 @@ export function validateFormData({ name, value }) {
     return error
 }
 
+
 const validateEmail = (email) => {
     return String(email)
       .toLowerCase()

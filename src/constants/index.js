@@ -17,6 +17,8 @@ export const MESSAGE_ERROR = {
     password_required: 'Password không để rỗng',
     username_required: 'Tên đăng nhập không để rỗng',
 
+    //Form Error
+    form_comment_required: 'Bình luận phải từ 30 ký tự trở lên',
 
     default: 'Có lỗi xảy ra vui lòng quay lại sau!'
 }
