@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { useCommentsPaging } from "../../hook/useCommentPagings"
 import CommentAction from "./CommentAction"
 import CommentForm from "./CommentForm"
@@ -5,15 +6,21 @@ import CommentSection from "./CommentSection"
 
 
 export default function CommentItem(props) {
+    const [isShowForm, setIsShowForm] = useState(false)
     const isThisParent = props.parentId === 0
     const { handleClickLoadMore,
         comments: replyComments, 
         loading } = useCommentsPaging({ parentId: props.comments.id }) // Use for childrenPaging
-
+    function handleOnReplyClick() {
+        setIsShowForm(!isShowForm)
+    }
     return (
         <>
             <li className="item">
-                <CommentSection comments={props.comments} />
+                <CommentSection
+                    onReplyClick = {handleOnReplyClick}
+                    comments={props.comments}
+                />
                 {
                     isThisParent && replyComments?.length > 0 && (
                         <ul className="comments">
@@ -41,8 +48,8 @@ export default function CommentItem(props) {
                     )
                 }
                 {
-                    isThisParent && false && (
-                        <CommentForm />
+                    isThisParent && isShowForm && (
+                        <CommentForm parentId={props.comments.id} />
                     )
                 }
             </li>

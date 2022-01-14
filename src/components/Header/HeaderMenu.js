@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom'
+
 import { actLogOut } from '../../store/auth/actions';
 import { actClearPostDetails } from '../../store/post/actions';
+
 import HeaderMainMenu from './HeaderMainMenu';
 
 function HeaderMenu() {
@@ -16,12 +18,10 @@ function HeaderMenu() {
         evt.preventDefault()
         dispatch(actLogOut())
         history.push('/')
-        
     }
 
     return (
         <div className="tcl-col-6">
-            {/* Nav */}
             <div className="header-nav">
                 <HeaderMainMenu />
                 <ul className="header-nav__lists">

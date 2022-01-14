@@ -25,7 +25,7 @@ export default function CommentForm({ parentId }) {
 
     function handleSubmitComment() {
         if(loading) return
-
+        
         setLoading(true)
         dispatch(actAsyncPostNewComments({
             authorId: currentUser.id,
@@ -33,8 +33,12 @@ export default function CommentForm({ parentId }) {
             content,
             postId
         })).then(res => {
+            if(res.ok){
+                setContent('')
+            }else{
+
+            }
             setLoading(false)
-            console.log('asdasdasdas')
         })
         
     }
@@ -49,7 +53,7 @@ export default function CommentForm({ parentId }) {
                         <img src={currentUser.avatar} alt={currentUser.nickname} />
                     </Link>
                 </div>
-                <textarea placeholder={placeHolder} value={content} onChange={handleChangeComment} />
+                <textarea placeholder={placeHolder} value={content} name="contentcomment" onChange={handleChangeComment} />
             </div>
             <div className="text-right">
                 <Button onClick={handleSubmitComment} Loading={loading}>{btnLabel}</Button>

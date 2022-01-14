@@ -17,7 +17,8 @@ export function useCommentsPaging({
     list: comments,
         currentPage,
         totalPages,
-        total
+        total: _total,
+        exclude
     } = useSelector(state => {
       if(parentId === 0){
         return fnParentPagingSelector(state)
@@ -35,6 +36,7 @@ export function useCommentsPaging({
           currentPage: currentPage + 1,
           postId: postId,
           parentId,
+          exclude,
           ...extraParams
         })).then(() => {
           setLoading(false)
@@ -43,7 +45,7 @@ export function useCommentsPaging({
     }
     return{
         comments,
-        total,
+        total: _total + exclude?.length,
         handleClickLoadMore,
         hasMoreComments,
         totalPages,
