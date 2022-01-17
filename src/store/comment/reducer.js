@@ -1,13 +1,8 @@
+import { getDefaultCmtPaging } from "../../helpers";
 import { ACT_GET_COMMENT_REPLY_POST, ACT_GET_COMMENT_PARENT_POST, ACT_INIT_COMMENT_CHILDREN_PAGING, ACT_NEW_COMMENT_PARENT, ACT_NEW_REPLY_COMMENTS } from "./actions";
 
 const initState = {
-    parentPaging:{
-        list: [],
-        currentPage: 1,
-        total: 0,
-        totalPages: 0,
-        exclude: []
-    },
+    parentPaging: getDefaultCmtPaging(),
     hashChildPaging:{ }
 }
 
@@ -16,15 +11,19 @@ function reducer(commentState = initState, action) {
     switch (action.type) {
         case ACT_NEW_REPLY_COMMENTS:
             parentId = action.payload.comment.parentId
+            let currentChildPaging = commentState.hashChildPaging[parentId] // call hashChildPaging by parent ID in array
             return{
                 ...commentState,
                 hashChildPaging:{
                     ...commentState.hashChildPaging,
                     [parentId]:{
+                        ...currentChildPaging,
                         list:[
-                            action.payload.comment,
+                            ...currentChildPaging.list,
+                            action.payload.comment
                         ],
                         exclude:[
+                            ...currentChildPaging.exclude,
                             action.payload.comment.id
                         ]
                     }
@@ -67,13 +66,7 @@ function reducer(commentState = initState, action) {
                 hashChildPaging:{
                     ...commentState.hashChildPaging,
                     ...action.payload.comments.reduce((output, commentItem) => {
-                         output[commentItem.id] = {
-                             list: [],
-                             currentPage: 0,
-                             total: 0,
-                             totalPage: 1,
-                             exclude: []
-                         }
+                         output[commentItem.id] = getDefaultCmtPaging()
                          return output
                     }, {})
                 }
@@ -86,7 +79,10 @@ function reducer(commentState = initState, action) {
                    ...commentState.hashChildPaging,
                    [parentId]:{
                         ...commentState.hashChildPaging[parentId],
-                        list : action.payload.currentPage === 1 
+                        list : (
+                            action.payload.currentPage === 1
+                            && commentState.hashChildPaging[parentId].exclude.length === 0
+                        ) 
                         ? action.payload.comments 
                         : [...commentState.hashChildPaging[parentId].list, ...action.payload.comments],
                         total: action.payload.total,

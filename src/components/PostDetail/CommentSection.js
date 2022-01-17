@@ -19,11 +19,11 @@ function CommentSection({ comments, onReplyClick, parentId }) {
             <div className="comments__section--content">
                 <Link to={authorLink} className="comments__section--user">{authorName}</Link>
                 <p className="comments__section--time" title={dateRelative}>{dateFormated}</p>
-                <div className="comments__section--text" dangerouslySetInnerHTML={{
-                    __html: content
-                }}>
+                <div className="comments__section--text" dangerouslySetInnerHTML={{__html: content}}>
                 </div>
-                <i className="ion-reply comments__section--reply" onClick={onReplyClick}></i>
+                {
+                    comments.parentId === 0 && <i className="ion-reply comments__section--reply" onClick={onReplyClick}></i>
+                }
             </div>
         </div>
     )
