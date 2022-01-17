@@ -26,7 +26,7 @@ export default function CommentAction({
 
     const label = parent ? `Xem thêm ${count} bình luận` : `${count} phản hồi`
 
-    if (count === 0 || count === undefined) return null
+    if (count === 0 || count === undefined || count < 0) return null
 
     return (
         <div className={classes}>
