@@ -10,9 +10,7 @@ function reducer(tagState = initState, action) {
             return{
                 ...tagState,
                 hashTagsById: action.payload.hashTagsById
-            }
-            
-    
+            }    
         default:
             return tagState
     }

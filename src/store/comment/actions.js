@@ -108,7 +108,10 @@ export function actAsyncPostNewComments({
 
             return{ok: true }
         } catch (error) {
-            return {ok: false}
+            return {
+                ok: false,
+                
+            }
         }
     }
 }

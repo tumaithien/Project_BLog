@@ -9,7 +9,8 @@ export default function CommentItem(props) {
     const [isShowForm, setIsShowForm] = useState(false)
     const isThisParent = props.parentId === 0
     const { handleClickLoadMore,
-        comments: replyComments, 
+        comments: replyComments,
+        exclude,
         loading } = useCommentsPaging({ parentId: props.comments.id }) // Use for childrenPaging
     function handleOnReplyClick() {
         setIsShowForm(!isShowForm)
@@ -41,7 +42,7 @@ export default function CommentItem(props) {
                 {
                     isThisParent && props.comments.replyCount > 0 &&  (
                         <CommentAction 
-                            count={props.comments.replyCount - replyComments.length} 
+                            count={props.comments.replyCount - replyComments.length + exclude.length} 
                             onClick={handleClickLoadMore}
                             Loading={loading} 
                         />

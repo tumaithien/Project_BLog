@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { getDefaultCmtPaging } from "../helpers"
 import { actAsyncGetComments } from "../store/comment/actions"
 
 const fnSelectorPost = state => state.Post.postDetail && state.Post.postDetail.id
@@ -23,7 +24,7 @@ export function useCommentsPaging({
       if(parentId === 0){
         return fnParentPagingSelector(state)
       }
-      return fnChildrenPagingSelector(state, parentId) || { }
+      return fnChildrenPagingSelector(state, parentId) || getDefaultCmtPaging()
     })
     const hasMoreComments = currentPage < totalPages
 
@@ -45,10 +46,11 @@ export function useCommentsPaging({
     }
     return{
         comments,
-        total: _total + exclude?.length,
+        total: _total + exclude.length,
         handleClickLoadMore,
         hasMoreComments,
         totalPages,
-        loading
+        loading,
+        exclude
     }
 }

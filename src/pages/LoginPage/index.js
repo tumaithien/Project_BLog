@@ -1,13 +1,18 @@
+import './login.css'
+
 import Button from '../../components/shared/Button'
 import Input from '../../components/shared/Input'
 import MainTitle from '../../components/shared/MainTitle'
-import { Link } from 'react-router-dom'
-import './login.css'
+
 import { useState } from 'react'
-import { validateFormData } from '../../helpers'
-import { useDispatch } from 'react-redux'
-import { actAsyncLogin } from '../../store/auth/actions'
 import { useNotAuthenticated } from '../../hook/useNotAuthenticated'
+import { useDispatch } from 'react-redux'
+
+import { Link } from 'react-router-dom'
+import { validateFormData } from '../../helpers'
+import { actAsyncLogin } from '../../store/auth/actions'
+import { useEffect } from 'react'
+
 
 
 function Login() {
@@ -43,26 +48,6 @@ function Login() {
     }
     
     function checkFormIsValid() {
-        // if(!isFormDirty){
-        //     setFormData(
-        //         {
-        //         username:{
-        //             value: '',
-        //             error: validateFormData({
-        //                 value: '',
-        //                 name: 'username'
-        //             })
-        //         },
-        //         password:{
-        //             value: '',
-        //             error: validateFormData({
-        //                 value: '',
-        //                 name: 'password'
-        //             })
-        //         }
-        //     })
-        // }
-
         const newFormData = {}
         Object.keys(formData)
         .forEach(key => {
@@ -82,10 +67,6 @@ function Login() {
                 return false
             }
         }
-        
-        // if(formData.username.error || formData.password.error){
-        //     return false;
-        // }
         return true
     }
 
@@ -99,7 +80,6 @@ function Login() {
         evt.preventDefault();
         const isValid = checkFormIsValid(); 
         if(!isValid){
-            console.log('Form error');
             return
         }
         dispatch(actAsyncLogin(username.value, password.value))
@@ -108,7 +88,6 @@ function Login() {
             }else{
                 setFormError(res.error)
             }
-
             setLoading(false)
         })
     }

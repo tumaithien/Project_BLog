@@ -20,6 +20,7 @@ function Input({
             setLocalType('password');
         }
     }
+
     const classesIconShow = cls('toggle-password', {
         'ion-eye': localType === 'password',
         'ion-eye-disabled': localType === 'text'
@@ -32,7 +33,7 @@ function Input({
             <div className="input-search">
                 {icon}
                 <input 
-                    className={classesSearch} 
+                    className={classesSearch } 
                     type="text"
                     {...restProps}
                 />

@@ -1,8 +1,10 @@
+import './comments.css'
+
 import { useCommentsPaging } from '../../hook/useCommentPagings'
+
 import CommentAction from './CommentAction'
 import CommentForm from './CommentForm'
 import CommentItem from './CommentItem'
-import './comments.css'
 
 const handleMapComments = commnetItems => (
     <CommentItem
@@ -12,7 +14,6 @@ const handleMapComments = commnetItems => (
     />
 )
 function PostDetailComments() {
-    
     const {comments, total, handleClickLoadMore, hasMoreComments, loading} = useCommentsPaging()
     return (
         <>
