@@ -121,7 +121,6 @@ export function validateFormData({ name, value }) {
     if (name === 'password') {
         if (!value) error = MESSAGE_ERROR.password_required
         else if (value.length < 6) error = MESSAGE_ERROR.password_length
-
     }
     return error
 }

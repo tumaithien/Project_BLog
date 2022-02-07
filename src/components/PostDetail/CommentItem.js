@@ -10,6 +10,7 @@ export default function CommentItem(props) {
     const isThisParent = props.parentId === 0
     const { handleClickLoadMore,
         comments: replyComments,
+        total,
         exclude,
         loading } = useCommentsPaging({ parentId: props.comments.id }) // Use for childrenPaging
     function handleOnReplyClick() {
