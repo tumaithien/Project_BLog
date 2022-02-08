@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom'
 function HeaderSearch() {
 
     const history = useHistory();
-
     const [queryStr, setQueryStr] = useState('')
 
     function handleOnChage(evt) {
@@ -14,7 +13,6 @@ function HeaderSearch() {
 
     function handleSubmit(evt) {
         evt.preventDefault()
-        console.log(queryStr);
 
         if(!queryStr){
             return
@@ -22,7 +20,7 @@ function HeaderSearch() {
         const queryStrURI = encodeURIComponent(queryStr);
         history.push('/search?q=' + queryStrURI)
     }
-
+    
     return (
         <div className="tcl-col-4">
             {/* Header Search */}
@@ -32,7 +30,7 @@ function HeaderSearch() {
                     name="query" 
                     type="search" 
                     className
-                    placeholder="Search articles here ..."
+                    placeholder="Tìm kiếm ..."
                     value={queryStr}
                     onChange={handleOnChage}
                     />

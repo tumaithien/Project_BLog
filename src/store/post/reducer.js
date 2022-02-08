@@ -1,4 +1,4 @@
-import { ACT_INCREASE_COMMENT_COUNT, ACT_CLEAR_POST_DETAIL, ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST } from "./actions"
+import { ACT_INCREASE_COMMENT_COUNT, ACT_CLEAR_POST_DETAIL, ACT_GET_ARTICLES, ACT_GET_ARTICLE_LASTEST, ACT_GET_ARTICLE_POPULAR, ACT_GET_POST_DETAIL, ACT_GET_RELATED_POST, ACT_GET_RELATED_TAGS_POST } from "./actions"
 
 
 
@@ -11,7 +11,8 @@ const initState = {
     currentPage: 1,
   },
   postDetail: null,
-  relatedPostByAuthor: []
+  relatedPostByAuthor: [],
+  relatedPostByTags: []
 }
 
 
@@ -61,6 +62,11 @@ function reducer(postState = initState, action) {
       return {
         ...postState,
         relatedPostByAuthor: action.payload.posts
+      }
+    case ACT_GET_RELATED_TAGS_POST:
+      return {
+        ...postState,
+        relatedPostByTags: action.payload.posts
       }
     case ACT_CLEAR_POST_DETAIL:
       return {

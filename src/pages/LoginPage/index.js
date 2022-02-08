@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { validateFormData } from '../../helpers'
 import { actAsyncLogin } from '../../store/auth/actions'
-import { useEffect } from 'react'
 
 
 
@@ -19,6 +18,7 @@ function Login() {
 
     useNotAuthenticated()
     const dispatch = useDispatch()
+    
     // const [isFormDirty, setIsFormDirty] = useState(false);
     const [formError, setFormError] = useState('')
     const [loading, setLoading] = useState(false)
@@ -64,7 +64,8 @@ function Login() {
 
         for(const key in formData){
             if(formData[key].error){
-                return false
+                setLoading(false)
+                return
             }
         }
         return true
@@ -91,7 +92,6 @@ function Login() {
             setLoading(false)
         })
     }
-
     return (
             <div>
                 <main className="login">

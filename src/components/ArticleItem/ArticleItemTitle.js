@@ -14,7 +14,6 @@ function ArticleItemTitle(
 ){
     const location = useLocation()
     const queryStr = getQueryStr('q', location)
-
     const classes = cls('article-item__title', className)
     return(
         <>

@@ -1,4 +1,4 @@
-import Button from "../components/shared/Button"
+import { Link } from "react-router-dom"
 
 
 function PageAuthen() {
@@ -6,7 +6,7 @@ function PageAuthen() {
         <div className="articles-list section">
             <div className="tcl-container text-center">
                 <h1>Vui lòng đăng nhập để xem chi tiết bài viết</h1>
-                <Button as="a" href="/login">Đăng nhập</Button>
+                    <Link to="/login">Đăng nhập</Link>
             </div>
         </div>
     )

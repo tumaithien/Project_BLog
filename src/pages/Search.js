@@ -17,6 +17,7 @@ import ArticleItem from '../components/ArticleItem'
 function Search() {
     const dispatch = useDispatch()
     const location = useLocation();
+    console.log(location)
     let locationStr = location.search;
     locationStr = getQueryStr('q');
     const [status, setStatus] = useState('loading')

@@ -14,22 +14,30 @@ import PostDetailsPage from './pages/PostDetailsPage'
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 
 
 import { actAsyncAllCategory } from './store/category/action'
-import {actAsyncGetInfoUser} from './store/auth/actions'
+import { actAsyncGetInfoUser } from './store/auth/actions'
 import { actAsyncGetMenu, actAsyncGetMenuFooter } from './store/menu/action'
 import { actAsyncGetTags } from './store/tag/action'
+import UserInfo from './pages/UserInfo'
 
 
 
 function App() {
 
-  const dispatch = useDispatch()
+  // const location1 = window.location.pathname
+  // const [hideMenu, setHideMenu] = useState(false)
+  // useEffect(() => {
+  //   if(location1 === "/login"){
+  //     setHideMenu(true)
+  //   }
+  // },[location1, hideMenu])
 
+  const dispatch = useDispatch()
   useEffect(() => {
     dispatch(actAsyncAllCategory())
     dispatch(actAsyncGetInfoUser())
@@ -40,13 +48,19 @@ function App() {
   return (
     <Router>
       <div className="wrapper-content">
-        <Header />
+      <Header />
+        {/* {
+          !hideMenu && <Header /> 
+        } */}
         <Switch>
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/info-user">
+            <UserInfo />
           </Route>
           <Route path="/change-pass">
             <ChangePassPage />

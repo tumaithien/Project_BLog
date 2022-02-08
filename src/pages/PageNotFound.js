@@ -6,7 +6,8 @@ function PageNotFound() {
         <div className="articles-list section">
             <div className="tcl-container text-center">
                 <h1>Không tìm thấy trang</h1>
-                <Button as="a" href="/">Trở về trang chủ</Button>
+                <img src="https://d11kg6go43tgrf.cloudfront.net/frontend/images/error.svg" alt="Not found" />
+                <Button as="a" size="large" href="/">Trở về trang chủ</Button>
             </div>
         </div>
     )

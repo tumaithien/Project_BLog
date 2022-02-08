@@ -5,7 +5,7 @@ import HeaderSearch from './HeaderSearch'
 import HeaderMenu from './HeaderMenu'
 
 
-function Header() {
+function Header({type}) {
     const [scrolled, setScrolled] = useState(false)
 
     function handleScroll() {

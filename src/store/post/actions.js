@@ -10,6 +10,7 @@ export const ACT_GET_POST_DETAIL = 'ACT_GET_POST_DETAIL'
 export const ACT_GET_RELATED_POST = 'ACT_GET_RELATED_POST'
 export const ACT_CLEAR_POST_DETAIL = 'ACT_CLEAR_POST_DETAIL'
 export const ACT_INCREASE_COMMENT_COUNT = 'ACT_INCREASE_COMMENT_COUNT'
+export const ACT_GET_RELATED_TAGS_POST = 'ACT_GET_RELATED_TAGS_POST'
 
 
 export function actGetArticleLastest(posts){
@@ -51,7 +52,7 @@ export function actGetArticles({
 }
 
 export function actAsyncGetArticles({
-    currentPage = 1, 
+    currentPage = 1,
     perPage = 2,
     ...restParam
 } = {}) {
@@ -130,9 +131,12 @@ export function actAsyncGetPostDetails(slug) {
             }
             const postId = post.id
             const authorId = post.author
+            const categoriesId = post.categories
+            console.log(categoriesId)
             dispatch(actGetPostDetails(mappingPostDetailData(post)))
             dispatch(actAsyncGetComments({ postId }))
             dispatch(actGetAsyncRelatedPost({postId, authorId}))
+            dispatch(actGetAsyncRelatedTagPost({postId, categoriesId}))
             return { ok: true }
         } catch (error) {
             return {
@@ -160,6 +164,30 @@ export function actGetAsyncRelatedPost({postId, authorId}) {
             
             const posts = response.data.map(mappingPostData)
             dispatch(actGetRelatedPost(posts))
+        } catch (error) {
+            
+        }
+    }
+}
+
+export function actGetRelatedTagPost(posts) {
+    return {
+        type: ACT_GET_RELATED_TAGS_POST,
+        payload: {posts}
+    }
+}
+
+export function actGetAsyncRelatedTagPost({postId, categoriesId}) {
+    return async (dispatch) => {
+        try {
+            const response = await postServices.getList({
+                categories: categoriesId,
+                per_page: 3,
+                exclude: postId
+            })
+            const posts = response.data.map(mappingPostData)
+            dispatch(actGetRelatedTagPost(posts))
+
         } catch (error) {
             
         }

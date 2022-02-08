@@ -33,7 +33,7 @@ function Input({
             <div className="input-search">
                 {icon}
                 <input 
-                    className={classesSearch } 
+                    className={classesSearch} 
                     type="text"
                     {...restProps}
                 />

@@ -32,9 +32,9 @@ function ArticleItem(
     if(!post){
         return null
     }
-    const { slug, title, author, createDate, thumb, author_id, categoriesId, viewCount, shortDecsHTML } = post
+    const { slug, title, author, createDate, thumb, authorId, categoriesId, viewCount, shortDecsHTML } = post
     const slugLink = genPostLink(slug)
-    const slugAuthor = genUserLink(author_id)
+    const slugAuthor = genUserLink(authorId)
 
     return (
         <>

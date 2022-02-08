@@ -3,9 +3,18 @@ import PostDetailComments from './PostDetailComments'
 import TagsRelated from '../ArticleItem/TagsRelated'
 import { useSelector } from 'react-redux'
 import PostRichText from './PostRichText'
+import PageAuthen from '../../pages/PageAuthen'
 function PostDetailContent() {
     const postContentSelector = useSelector(state => state.Post.postDetail)
+    const currentUser = useSelector(state => state.Authen.currentUser)
     const { contet, thumb, title, tagsId } = postContentSelector
+    if(!currentUser){
+        return (
+            <>
+                <PageAuthen />
+            </>
+        )
+    }
     return (
         <div className="post-detail__content">
             <div className="thumbnail">

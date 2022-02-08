@@ -10,6 +10,7 @@ function PostDetailAuthor() {
     const { author, authorId} = post
     const{nickname, description, avatar} = author
     const authorLink = genUserLink(authorId)
+    console.log(author)
     return (
         <div className="post-author">
             <div className="post-author__bg-avatar">

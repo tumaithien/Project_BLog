@@ -5,6 +5,7 @@ import PostItemRelated from "./PostItemRelated"
 function RelatedPost() {
 
     const post = useSelector(state => state.Post.relatedPostByAuthor)
+    console.log(post)
     return (
         <div className="related-post">
             <h2 className="related-post__head">Bài viết liên quan</h2>

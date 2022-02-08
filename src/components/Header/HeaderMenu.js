@@ -13,13 +13,13 @@ function HeaderMenu() {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const{modal, Toggle} = useModal()
+    const [modal, Toggle] = useModal()
     const currentUser = useSelector(state => state.Authen.currentUser)
 
     function handleLogout(evt) {
         dispatch(actClearPostDetails())
-        evt.preventDefault()
         dispatch(actLogOut())
+        evt.preventDefault()
         history.push('/')
         Toggle()
     }
@@ -33,17 +33,17 @@ function HeaderMenu() {
                         {
                             currentUser ?
                                 (<li className="user">
-                                    <Link to="/dashboard"><i className="icons ion-person" />
+                                    <Link to="/info-user"><i className="icons ion-person" />
                                         {currentUser.name}
                                     </Link>
                                     <ul>
-                                        <li><a href='#' onClick={() => Toggle()}>Logout</a></li>
+                                        <li><a href='#!' onClick={handleLogout}>Logout</a></li>
                                         <li><Link to="/change-pass">Change Password</Link></li>
                                     </ul>
                                 </li>) : (<li className="user">
-                                    <Link to="/login"><i className="icons ion-person" />
+                                    <a href='/login'><i className="icons ion-person" />
                                         Login
-                                    </Link>
+                                    </a>
                                 </li>)
                         }
 

@@ -5,7 +5,8 @@ import { ACCESS_TOKEN, BASE_URL } from '../constants';
 export const api = {
     call(){
         return axios.create({
-            baseURL: BASE_URL
+            baseURL: BASE_URL,
+            method: 'GET'
           });
     },
     callWithToken(){

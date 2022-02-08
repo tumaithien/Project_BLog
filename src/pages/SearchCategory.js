@@ -20,7 +20,6 @@ function SearchCategory() {
     const hashCategoryById = useSelector(state => state.Category.hashCategoryById)
 
     const dispatch = useDispatch()
-
     useEffect(() => {
         if (isFetchedCategory) {
             // let isFound = false
@@ -35,7 +34,7 @@ function SearchCategory() {
             // if (isFound === false) {
             //     setCategory(null)
             // }
-
+            
             const foundId = Object.keys(hashCategoryById).find(categoryId => {
                 const valueCategory = hashCategoryById[categoryId]
                 return valueCategory.slug === slug && valueCategory.lang === 'vi'

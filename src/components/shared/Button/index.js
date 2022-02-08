@@ -13,15 +13,6 @@ import IconLoading from '../IconLoading'
     children,
     ...restProps
  }){
-    //  let classes = 'btn';
-    //  if(type === 'default'){
-    //      classes += ' btn-default';
-    //  }
-    //  else if(type === 'category'){
-    //     classes += ' btn-category';
-    //  }else if(type === 'primary'){
-    //      classes += ' btn-primary';
-    //  }
     const classes = cls('btn',{
         'btn-default': type === 'default',
         'btn-category': type === 'category',
