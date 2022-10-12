@@ -1,43 +1,41 @@
 import Input from "../shared/Input";
-import { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function HeaderSearch() {
+  const history = useHistory();
+  const [queryStr, setQueryStr] = useState("");
 
-    const history = useHistory();
-    const [queryStr, setQueryStr] = useState('')
+  function handleOnChage(evt) {
+    setQueryStr(evt.target.value);
+  }
 
-    function handleOnChage(evt) {
-        setQueryStr(evt.target.value);
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!queryStr) {
+      return;
     }
+    const queryStrURI = encodeURIComponent(queryStr);
+    history.push("/search?q=" + queryStrURI);
+  }
 
-    function handleSubmit(evt) {
-        evt.preventDefault()
-
-        if(!queryStr){
-            return
-        }
-        const queryStrURI = encodeURIComponent(queryStr);
-        history.push('/search?q=' + queryStrURI)
-    }
-    
-    return (
-        <div className="tcl-col-4">
-            {/* Header Search */}
-            <form onSubmit={handleSubmit}>
-                <div className="header-search">
-                    <Input
-                    name="query" 
-                    type="search" 
-                    className
-                    placeholder="Tìm kiếm ..."
-                    value={queryStr}
-                    onChange={handleOnChage}
-                    />
-                </div>
-            </form>
+  return (
+    <div className="tcl-col-4">
+      {/* Header Search */}
+      <form onSubmit={handleSubmit}>
+        <div className="header-search">
+          <Input
+            name="query"
+            type="search"
+            className
+            placeholder="Tìm kiếm ..."
+            value={queryStr}
+            onChange={handleOnChage}
+          />
         </div>
-    );
+      </form>
+    </div>
+  );
 }
 
-export default HeaderSearch
+export default HeaderSearch;
